@@ -1,0 +1,1 @@
+export type NCName = String;

@@ -1,0 +1,31 @@
+import {AtomAuthor} from '../../atom/atom-author';
+import {AtomLink} from '../../atom/atom-link';
+import {AnyURI} from '../../xsd/anyURI';
+import {AbstractObjectType} from './abstract-object-type';
+import {AbstractViewType} from './abstract-view-type';
+import {AbstractTimePrimitiveType} from './abstract-time-primitive-type';
+import {AbstractStyleSelectorType} from './abstract-style-selector-type';
+import {RegionType} from './region-type';
+import {ExtendedDataType} from './extended-data-type';
+
+export interface AbstractFeatureType extends AbstractObjectType {
+
+    // Child elements
+    name?: string;
+    visibility?: boolean;
+    open?: boolean;
+    atomAuthor?: AtomAuthor;
+    atomLink?: AtomLink;
+    address?: string;
+    //TODO: xal:AddressDetails
+    phoneNumber?: string;
+    snippet?: string;
+    description?: string;
+    view?: AbstractViewType;
+    timePrimitive?: AbstractTimePrimitiveType;
+    styleUrl?: AnyURI;
+    styleSelector?: AbstractStyleSelectorType[];
+    region?: RegionType;
+    extendedData?: ExtendedDataType;
+
+}
