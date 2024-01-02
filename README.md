@@ -1,4 +1,4 @@
-# kmljs
+# kml.js
 
 An Open Geospatial Consortium KML 2.2.0 reference implementation ([Link](https://www.ogc.org/standard/kml))
 
@@ -7,7 +7,7 @@ An Open Geospatial Consortium KML 2.2.0 reference implementation ([Link](https:/
 ## Installation
 
 ````shell
-npm install kmljs
+npm install @bioroxx/kmljs
 ````
 
 ## Usage
@@ -15,7 +15,7 @@ npm install kmljs
 ### Parsing
 
 ````js
-import {KMLParser} from 'kmljs';
+import {KMLParser} from '@bioroxx/kmljs';
 import {readFileSync} from 'fs';
 
 const kmlFileString = readFileSync('./my-kml-file.kml', 'utf-8');
@@ -30,7 +30,7 @@ to the `KMLParser` as a constructor argument. This especially makes sense, if yo
 `KMLParser` to create your own KML objects.
 
 ````ts
-import {KMLFactory, PlacemarkType, Placemark, KMLParser} from 'kmljs';
+import {KMLFactory, PlacemarkType, Placemark, KMLParser} from '@bioroxx/kmljs';
 import {readFileSync} from 'fs';
 
 class MyPlacemark extends Placemark {
