@@ -2,7 +2,7 @@
   "name": "kmljs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bioroxx/kmljs"
+    "url": "https://github.com/Bioroxx/kmljs.git"
   },
   "version": "0.0.1",
   "description": "An Open Geospatial Consortium KML 2.2.0 reference implementation",
