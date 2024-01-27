@@ -1,5 +1,5 @@
 export enum RefreshModeEnumType {
-    onChange = 'onChange',
-    onInterval = 'onInterval',
-    onExpire = 'onExpire'
+  onChange = 'onChange',
+  onInterval = 'onInterval',
+  onExpire = 'onExpire'
 }

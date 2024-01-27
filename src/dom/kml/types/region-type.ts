@@ -4,8 +4,8 @@ import {LodType} from './lod-type';
 
 export interface RegionType extends AbstractObjectType {
 
-    // Child elements
-    latLonAltBox?: LatLonAltBoxType;
-    lod?: LodType;
+  // Child elements
+  latLonAltBox?: LatLonAltBoxType;
+  lod?: LodType;
 
 }

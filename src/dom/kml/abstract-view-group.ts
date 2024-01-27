@@ -3,7 +3,7 @@ import {AbstractViewType} from './types/abstract-view-type';
 
 export abstract class AbstractViewGroup extends AbstractObjectGroup implements AbstractViewType {
 
-    constructor(abstractViewType: AbstractViewType) {
-        super(abstractViewType);
-    }
+  constructor(abstractViewType: AbstractViewType) {
+    super(abstractViewType);
+  }
 }

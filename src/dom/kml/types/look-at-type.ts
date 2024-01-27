@@ -6,13 +6,13 @@ import {AltitudeModeGroup} from '../altitude-mode-group';
 
 export interface LookAtType extends AbstractViewType {
 
-    // Child elements
-    longitude?: Angle180Type;
-    latitude?: Angle90Type;
-    altitude?: number;
-    heading?: Angle360Type;
-    tilt?: Angle180Type;
-    range?: number;
-    altitudeMode?: AltitudeModeGroup;
+  // Child elements
+  longitude?: Angle180Type;
+  latitude?: Angle90Type;
+  altitude?: number;
+  heading?: Angle360Type;
+  tilt?: Angle180Type;
+  range?: number;
+  altitudeMode?: AltitudeModeGroup;
 
 }

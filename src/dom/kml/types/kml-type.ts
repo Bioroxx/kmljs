@@ -3,11 +3,11 @@ import {AbstractFeatureType} from './abstract-feature-type';
 
 export interface KmlType {
 
-    // Attributes
-    hint?: string;
+  // Attributes
+  hint?: string;
 
-    // Child elements
-    networkLinkControl?: NetworkLinkControlType
-    feature?: AbstractFeatureType;
+  // Child elements
+  networkLinkControl?: NetworkLinkControlType
+  feature?: AbstractFeatureType;
 
 }

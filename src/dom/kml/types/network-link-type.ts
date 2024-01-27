@@ -3,9 +3,9 @@ import {LinkType} from './link-type';
 
 export interface NetworkLinkType extends AbstractFeatureType {
 
-    // Child elements
-    refreshVisibility?: boolean;
-    flyToView?: boolean;
-    link?: LinkType;
+  // Child elements
+  refreshVisibility?: boolean;
+  flyToView?: boolean;
+  link?: LinkType;
 
 }

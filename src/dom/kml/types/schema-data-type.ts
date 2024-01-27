@@ -4,10 +4,10 @@ import {SimpleDataType} from './simple-data-type';
 
 export interface SchemaDataType extends AbstractObjectType {
 
-    // Attributes
-    schemaUrl?: AnyURI;
+  // Attributes
+  schemaUrl?: AnyURI;
 
-    // Child elements
-    simpleData: SimpleDataType[];
+  // Child elements
+  simpleData: SimpleDataType[];
 
 }

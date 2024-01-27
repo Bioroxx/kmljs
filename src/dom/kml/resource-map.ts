@@ -4,11 +4,11 @@ import {ResourceMapType} from './types/resource-map-type';
 
 export class ResourceMap extends AbstractObjectGroup implements ResourceMapType {
 
-    alias: Alias[];
+  alias: Alias[];
 
-    constructor(resourceMapType: ResourceMapType) {
-        super(resourceMapType);
+  constructor(resourceMapType: ResourceMapType) {
+    super(resourceMapType);
 
-        this.alias = resourceMapType.alias;
-    }
+    this.alias = resourceMapType.alias;
+  }
 }

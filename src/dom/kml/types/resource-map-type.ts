@@ -3,7 +3,7 @@ import {AliasType} from './alias-type';
 
 export interface ResourceMapType extends AbstractObjectType {
 
-    // Child elements
-    alias: AliasType[];
+  // Child elements
+  alias: AliasType[];
 
 }

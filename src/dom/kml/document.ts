@@ -6,13 +6,13 @@ import {DocumentType} from './types/document-type';
 
 export class Document extends AbstractContainerGroup implements DocumentType {
 
-    schema: Schema[];
-    feature: AbstractFeatureGroup[];
+  schema: Schema[];
+  feature: AbstractFeatureGroup[];
 
-    constructor(documentType: DocumentType) {
-        super(documentType);
+  constructor(documentType: DocumentType) {
+    super(documentType);
 
-        this.schema = documentType.schema;
-        this.feature = documentType.feature;
-    }
+    this.schema = documentType.schema;
+    this.feature = documentType.feature;
+  }
 }

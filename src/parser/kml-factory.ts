@@ -102,211 +102,212 @@ import {Delete} from '../dom/kml/delete';
 
 export class KMLFactory {
 
-    createKml(obj: KmlType): KmlType {
-        return new Kml(obj);
-    }
 
-    createPlacemark(obj: PlacemarkType): PlacemarkType {
-        return new Placemark(obj);
-    }
+  createKml(obj: KmlType): KmlType {
+    return new Kml(obj);
+  }
 
-    createFolder(obj: FolderType): FolderType {
-        return new Folder(obj);
-    }
+  createPlacemark(obj: PlacemarkType): PlacemarkType {
+    return new Placemark(obj);
+  }
 
-    createDocument(obj: DocumentType): DocumentType {
-        return new Document(obj);
-    }
+  createFolder(obj: FolderType): FolderType {
+    return new Folder(obj);
+  }
 
-    createSchema(obj: SchemaType): SchemaType {
-        return new Schema(obj);
-    }
+  createDocument(obj: DocumentType): DocumentType {
+    return new Document(obj);
+  }
 
-    createSimpleField(obj: SimpleFieldType): SimpleFieldType {
-        return new SimpleField(obj);
-    }
+  createSchema(obj: SchemaType): SchemaType {
+    return new Schema(obj);
+  }
 
-    createMultiGeometry(obj: MultiGeometryType): MultiGeometryType {
-        return new MultiGeometry(obj);
-    }
+  createSimpleField(obj: SimpleFieldType): SimpleFieldType {
+    return new SimpleField(obj);
+  }
 
-    createLineString(obj: LineStringType): LineStringType {
-        return new LineString(obj);
-    }
+  createMultiGeometry(obj: MultiGeometryType): MultiGeometryType {
+    return new MultiGeometry(obj);
+  }
 
-    createLinearRing(obj: LinearRingType): LinearRingType {
-        return new LinearRing(obj);
-    }
+  createLineString(obj: LineStringType): LineStringType {
+    return new LineString(obj);
+  }
 
-    createModel(obj: ModelType): ModelType {
-        return new Model(obj);
-    }
+  createLinearRing(obj: LinearRingType): LinearRingType {
+    return new LinearRing(obj);
+  }
 
-    createLocation(obj: LocationType): LocationType {
-        return new Location(obj);
-    }
+  createModel(obj: ModelType): ModelType {
+    return new Model(obj);
+  }
 
-    createOrientation(obj: OrientationType): OrientationType {
-        return new Orientation(obj);
-    }
+  createLocation(obj: LocationType): LocationType {
+    return new Location(obj);
+  }
 
-    createScale(obj: ScaleType): ScaleType {
-        return new Scale(obj);
-    }
+  createOrientation(obj: OrientationType): OrientationType {
+    return new Orientation(obj);
+  }
 
-    createResourceMap(obj: ResourceMapType): ResourceMapType {
-        return new ResourceMap(obj);
-    }
+  createScale(obj: ScaleType): ScaleType {
+    return new Scale(obj);
+  }
 
-    createAlias(obj: AliasType): AliasType {
-        return new Alias(obj);
-    }
+  createResourceMap(obj: ResourceMapType): ResourceMapType {
+    return new ResourceMap(obj);
+  }
 
-    createPoint(obj: PointType): PointType {
-        return new Point(obj);
-    }
+  createAlias(obj: AliasType): AliasType {
+    return new Alias(obj);
+  }
 
-    createPolygon(obj: PolygonType): PolygonType {
-        return new Polygon(obj);
-    }
+  createPoint(obj: PointType): PointType {
+    return new Point(obj);
+  }
 
-    createLink(obj: LinkType): LinkType {
-        return new Link(obj);
-    }
+  createPolygon(obj: PolygonType): PolygonType {
+    return new Polygon(obj);
+  }
 
-    createIcon(obj: LinkType): LinkType {
-        return new Icon(obj);
-    }
+  createLink(obj: LinkType): LinkType {
+    return new Link(obj);
+  }
 
-    createLatLonBox(obj: LatLonBoxType): LatLonBoxType {
-        return new LatLonBox(obj);
-    }
+  createIcon(obj: LinkType): LinkType {
+    return new Icon(obj);
+  }
 
-    createLatLonAltBox(obj: LatLonAltBoxType): LatLonAltBoxType {
-        return new LatLonAltBox(obj);
-    }
+  createLatLonBox(obj: LatLonBoxType): LatLonBoxType {
+    return new LatLonBox(obj);
+  }
 
-    createRegion(obj: RegionType): RegionType {
-        return new Region(obj);
-    }
+  createLatLonAltBox(obj: LatLonAltBoxType): LatLonAltBoxType {
+    return new LatLonAltBox(obj);
+  }
 
-    createLod(obj: LodType): LodType {
-        return new Lod(obj);
-    }
+  createRegion(obj: RegionType): RegionType {
+    return new Region(obj);
+  }
 
-    createGroundOverlay(obj: GroundOverlayType): GroundOverlayType {
-        return new GroundOverlay(obj);
-    }
+  createLod(obj: LodType): LodType {
+    return new Lod(obj);
+  }
 
-    createPhotoOverlay(obj: PhotoOverlayType): PhotoOverlayType {
-        return new PhotoOverlay(obj);
-    }
+  createGroundOverlay(obj: GroundOverlayType): GroundOverlayType {
+    return new GroundOverlay(obj);
+  }
 
-    createScreenOverlay(obj: ScreenOverlayType): ScreenOverlayType {
-        return new ScreenOverlay(obj);
-    }
+  createPhotoOverlay(obj: PhotoOverlayType): PhotoOverlayType {
+    return new PhotoOverlay(obj);
+  }
 
-    createViewVolume(obj: ViewVolumeType): ViewVolumeType {
-        return new ViewVolume(obj);
-    }
+  createScreenOverlay(obj: ScreenOverlayType): ScreenOverlayType {
+    return new ScreenOverlay(obj);
+  }
 
-    createImagePyramid(obj: ViewVolumeType): ViewVolumeType {
-        return new ViewVolume(obj);
-    }
+  createViewVolume(obj: ViewVolumeType): ViewVolumeType {
+    return new ViewVolume(obj);
+  }
 
-    createNetworkLink(obj: NetworkLinkType): NetworkLinkType {
-        return new NetworkLink(obj);
-    }
+  createImagePyramid(obj: ViewVolumeType): ViewVolumeType {
+    return new ViewVolume(obj);
+  }
 
-    createCamera(obj: CameraType): CameraType {
-        return new Camera(obj);
-    }
+  createNetworkLink(obj: NetworkLinkType): NetworkLinkType {
+    return new NetworkLink(obj);
+  }
 
-    createLookAt(obj: LookAtType): LookAtType {
-        return new LookAt(obj);
-    }
+  createCamera(obj: CameraType): CameraType {
+    return new Camera(obj);
+  }
 
-    createTimeSpan(obj: TimeSpanType): TimeSpanType {
-        return new TimeSpan(obj);
-    }
+  createLookAt(obj: LookAtType): LookAtType {
+    return new LookAt(obj);
+  }
 
-    createTimeStamp(obj: TimeStampType): TimeStampType {
-        return new TimeStamp(obj);
-    }
+  createTimeSpan(obj: TimeSpanType): TimeSpanType {
+    return new TimeSpan(obj);
+  }
 
-    createStyle(obj: StyleType): StyleType {
-        return new Style(obj);
-    }
+  createTimeStamp(obj: TimeStampType): TimeStampType {
+    return new TimeStamp(obj);
+  }
 
-    createStyleMap(obj: StyleMapType): StyleMapType {
-        return new StyleMap(obj);
-    }
+  createStyle(obj: StyleType): StyleType {
+    return new Style(obj);
+  }
 
-    createPair(obj: PairType): PairType {
-        return new Pair(obj);
-    }
+  createStyleMap(obj: StyleMapType): StyleMapType {
+    return new StyleMap(obj);
+  }
 
-    createBalloonStyle(obj: BalloonStyleType): BalloonStyleType {
-        return new BalloonStyle(obj);
-    }
+  createPair(obj: PairType): PairType {
+    return new Pair(obj);
+  }
 
-    createIconStyle(obj: IconStyleType): IconStyleType {
-        return new IconStyle(obj);
-    }
+  createBalloonStyle(obj: BalloonStyleType): BalloonStyleType {
+    return new BalloonStyle(obj);
+  }
 
-    createLabelStyle(obj: LabelStyleType): LabelStyleType {
-        return new LabelStyle(obj);
-    }
+  createIconStyle(obj: IconStyleType): IconStyleType {
+    return new IconStyle(obj);
+  }
 
-    createLineStyle(obj: LineStyleType): LineStyleType {
-        return new LineStyle(obj);
-    }
+  createLabelStyle(obj: LabelStyleType): LabelStyleType {
+    return new LabelStyle(obj);
+  }
 
-    createListStyle(obj: ListStyleType): ListStyleType {
-        return new ListStyle(obj);
-    }
+  createLineStyle(obj: LineStyleType): LineStyleType {
+    return new LineStyle(obj);
+  }
 
-    createPolyStyle(obj: PolyStyleType): PolyStyleType {
-        return new PolyStyle(obj);
-    }
+  createListStyle(obj: ListStyleType): ListStyleType {
+    return new ListStyle(obj);
+  }
 
-    createItemIcon(obj: ItemIconType): ItemIconType {
-        return new ItemIcon(obj);
-    }
+  createPolyStyle(obj: PolyStyleType): PolyStyleType {
+    return new PolyStyle(obj);
+  }
 
-    createData(obj: DataType): DataType {
-        return new Data(obj);
-    }
+  createItemIcon(obj: ItemIconType): ItemIconType {
+    return new ItemIcon(obj);
+  }
 
-    createExtendedData(obj: ExtendedDataType): ExtendedDataType {
-        return new ExtendedData(obj);
-    }
+  createData(obj: DataType): DataType {
+    return new Data(obj);
+  }
 
-    createSchemaData(obj: SchemaDataType): SchemaDataType {
-        return new SchemaData(obj);
-    }
+  createExtendedData(obj: ExtendedDataType): ExtendedDataType {
+    return new ExtendedData(obj);
+  }
 
-    createSimpleData(obj: SimpleDataType): SimpleDataType {
-        return new SimpleData(obj);
-    }
+  createSchemaData(obj: SchemaDataType): SchemaDataType {
+    return new SchemaData(obj);
+  }
 
-    createNetworkLinkControl(obj: NetworkLinkControlType): NetworkLinkControlType {
-        return new NetworkLinkControl(obj);
-    }
+  createSimpleData(obj: SimpleDataType): SimpleDataType {
+    return new SimpleData(obj);
+  }
 
-    createUpdate(obj: UpdateType): UpdateType {
-        return new Update(obj);
-    }
+  createNetworkLinkControl(obj: NetworkLinkControlType): NetworkLinkControlType {
+    return new NetworkLinkControl(obj);
+  }
 
-    createChange(obj: ChangeType): ChangeType {
-        return new Change(obj);
-    }
+  createUpdate(obj: UpdateType): UpdateType {
+    return new Update(obj);
+  }
 
-    createCreate(obj: CreateType): CreateType {
-        return new Create(obj);
-    }
+  createChange(obj: ChangeType): ChangeType {
+    return new Change(obj);
+  }
 
-    createDelete(obj: DeleteType): DeleteType {
-        return new Delete(obj);
-    }
+  createCreate(obj: CreateType): CreateType {
+    return new Create(obj);
+  }
+
+  createDelete(obj: DeleteType): DeleteType {
+    return new Delete(obj);
+  }
 }

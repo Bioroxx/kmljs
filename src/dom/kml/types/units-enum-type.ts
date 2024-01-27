@@ -1,5 +1,5 @@
 export enum UnitsEnumType {
-    fraction = 'fraction',
-    pixels = 'pixels',
-    insetPixels = 'insetPixels'
+  fraction = 'fraction',
+  pixels = 'pixels',
+  insetPixels = 'insetPixels'
 }

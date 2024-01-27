@@ -4,11 +4,11 @@ import {PlacemarkType} from './types/placemark-type';
 
 export class Placemark extends AbstractFeatureGroup implements PlacemarkType {
 
-    geometry?: AbstractGeometryGroup;
+  geometry?: AbstractGeometryGroup;
 
-    constructor(placemarkType: PlacemarkType) {
-        super(placemarkType);
+  constructor(placemarkType: PlacemarkType) {
+    super(placemarkType);
 
-        this.geometry = placemarkType.geometry;
-    }
+    this.geometry = placemarkType.geometry;
+  }
 }

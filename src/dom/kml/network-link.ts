@@ -4,15 +4,15 @@ import {NetworkLinkType} from './types/network-link-type';
 
 export class NetworkLink extends AbstractFeatureGroup implements NetworkLinkType {
 
-    refreshVisibility?: boolean;
-    flyToView?: boolean;
-    link?: Link;
+  refreshVisibility?: boolean;
+  flyToView?: boolean;
+  link?: Link;
 
-    constructor(networkLinkType: NetworkLinkType) {
-        super(networkLinkType);
+  constructor(networkLinkType: NetworkLinkType) {
+    super(networkLinkType);
 
-        this.refreshVisibility = networkLinkType.refreshVisibility;
-        this.flyToView = networkLinkType.flyToView;
-        this.link = networkLinkType.link;
-    }
+    this.refreshVisibility = networkLinkType.refreshVisibility;
+    this.flyToView = networkLinkType.flyToView;
+    this.link = networkLinkType.link;
+  }
 }

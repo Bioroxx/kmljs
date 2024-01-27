@@ -3,6 +3,7 @@ import {DateTimeType} from './date-time-type';
 
 export interface TimeStampType extends AbstractTimePrimitiveType {
 
-    when?: DateTimeType;
+  // Child elements
+  when?: DateTimeType;
 
 }

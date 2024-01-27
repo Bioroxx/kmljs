@@ -3,9 +3,9 @@ import {ChangeType} from './types/change-type';
 
 export class Change implements ChangeType {
 
-    object: AbstractObjectGroup[];
+  object: AbstractObjectGroup[];
 
-    constructor(changeType: ChangeType) {
-        this.object = changeType.object;
-    }
+  constructor(changeType: ChangeType) {
+    this.object = changeType.object;
+  }
 }

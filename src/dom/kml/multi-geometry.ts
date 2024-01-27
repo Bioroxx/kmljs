@@ -3,11 +3,11 @@ import {MultiGeometryType} from './types/multi-geometry-type';
 
 export class MultiGeometry extends AbstractGeometryGroup implements MultiGeometryType {
 
-    geometry: AbstractGeometryGroup[];
+  geometry: AbstractGeometryGroup[];
 
-    constructor(multiGeometryType: MultiGeometryType) {
-        super(multiGeometryType);
+  constructor(multiGeometryType: MultiGeometryType) {
+    super(multiGeometryType);
 
-        this.geometry = multiGeometryType.geometry;
-    }
+    this.geometry = multiGeometryType.geometry;
+  }
 }

@@ -3,9 +3,9 @@ import {DeleteType} from './types/delete-type';
 
 export class Delete implements DeleteType {
 
-    feature: AbstractFeatureGroup[];
+  feature: AbstractFeatureGroup[];
 
-    constructor(deleteType: DeleteType) {
-        this.feature = deleteType.feature;
-    }
+  constructor(deleteType: DeleteType) {
+    this.feature = deleteType.feature;
+  }
 }

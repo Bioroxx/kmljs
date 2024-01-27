@@ -3,8 +3,8 @@ import {DateTimeType} from './date-time-type';
 
 export interface TimeSpanType extends AbstractTimePrimitiveType {
 
-    // Child elements
-    begin?: DateTimeType;
-    end?: DateTimeType;
+  // Child elements
+  begin?: DateTimeType;
+  end?: DateTimeType;
 
 }

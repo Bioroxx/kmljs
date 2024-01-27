@@ -1,5 +1,5 @@
 export enum AltitudeModeEnumType {
-    clampToGround = 'clampToGround',
-    relativeToGround = 'relativeToGround',
-    absolute = 'absolute'
+  clampToGround = 'clampToGround',
+  relativeToGround = 'relativeToGround',
+  absolute = 'absolute'
 }

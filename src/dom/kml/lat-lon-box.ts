@@ -4,11 +4,11 @@ import {LatLonBoxType} from './types/lat-lon-box-type';
 
 export class LatLonBox extends AbstractLatLonBox implements LatLonBoxType {
 
-    rotation?: Angle180Type;
+  rotation?: Angle180Type;
 
-    constructor(latLonBoxType: LatLonBoxType) {
-        super(latLonBoxType);
+  constructor(latLonBoxType: LatLonBoxType) {
+    super(latLonBoxType);
 
-        this.rotation = latLonBoxType.rotation;
-    }
+    this.rotation = latLonBoxType.rotation;
+  }
 }

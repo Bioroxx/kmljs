@@ -7,23 +7,23 @@ import {CameraType} from './types/camera-type';
 
 export class Camera extends AbstractViewGroup implements CameraType {
 
-    longitude?: Angle180Type;
-    latitude?: Angle90Type;
-    altitude?: number;
-    heading?: Angle360Type;
-    tilt?: Angle180Type;
-    roll?: Angle180Type;
-    altitudeMode?: AltitudeModeGroup;
+  longitude?: Angle180Type;
+  latitude?: Angle90Type;
+  altitude?: number;
+  heading?: Angle360Type;
+  tilt?: Angle180Type;
+  roll?: Angle180Type;
+  altitudeMode?: AltitudeModeGroup;
 
-    constructor(cameraType: CameraType) {
-        super(cameraType);
+  constructor(cameraType: CameraType) {
+    super(cameraType);
 
-        this.longitude = cameraType.longitude;
-        this.latitude = cameraType.latitude;
-        this.altitude = cameraType.altitude;
-        this.heading = cameraType.heading;
-        this.tilt = cameraType.tilt;
-        this.roll = cameraType.roll;
-        this.altitudeMode = cameraType.altitudeMode;
-    }
+    this.longitude = cameraType.longitude;
+    this.latitude = cameraType.latitude;
+    this.altitude = cameraType.altitude;
+    this.heading = cameraType.heading;
+    this.tilt = cameraType.tilt;
+    this.roll = cameraType.roll;
+    this.altitudeMode = cameraType.altitudeMode;
+  }
 }
