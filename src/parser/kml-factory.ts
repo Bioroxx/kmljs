@@ -99,10 +99,12 @@ import {Update} from '../dom/kml/update';
 import {Change} from '../dom/kml/change';
 import {Create} from '../dom/kml/create';
 import {Delete} from '../dom/kml/delete';
+import {AbstractStyleSelectorType} from '../dom/kml/types/abstract-style-selector-type';
 
 export class KMLFactory {
 
-
+  private sharedStyle: AbstractStyleSelectorType[] = [];
+  
   createKml(obj: KmlType): KmlType {
     return new Kml(obj);
   }
@@ -309,5 +311,18 @@ export class KMLFactory {
 
   createDelete(obj: DeleteType): DeleteType {
     return new Delete(obj);
+  }
+
+  setSharedStyle(sharedStyle: AbstractStyleSelectorType[]): void {
+    // Shared styles shall have an id attribute
+    this.sharedStyle = sharedStyle.filter(s => s.id !== undefined);
+  }
+
+  getSharedStyle(): AbstractStyleSelectorType[] {
+    return this.sharedStyle;
+  }
+
+  resetSharedStyle(): void {
+    this.sharedStyle = [];
   }
 }

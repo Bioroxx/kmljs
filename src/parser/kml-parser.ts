@@ -233,14 +233,14 @@ export class KMLParser {
     // TODO: atom:author
     // TODO: atom:link
     const address = parser.readChildElement('address', obj, parser.readTextContent);
+    // TODO: xal:AddressDetails
     const phoneNumber = parser.readChildElement('phoneNumber', obj, parser.readTextContent);
     const snippet = parser.readChildElement('snippet', obj, parser.readTextContent);
     const description = parser.readChildElement('description', obj, parser.readTextContent);
-    const styleUrl = parser.readChildElement('styleUrl', obj, parser.readXsdAnyUri);
-    // TODO: xal:AddressDetails
     const view = parser.readAbstractGroupOrType(obj, parser.readAbstractViewGroup);
     const timePrimitive = parser.readAbstractGroupOrType(obj, parser.readAbstractTimePrimitiveGroup);
-    const styleSelector = parser.readAbstractGroupOrType(obj, parser.readAbstractStyleSelectorGroupArray);
+    const styleUrl = parser.readChildElement('styleUrl', obj, parser.readXsdAnyUri);
+    const styleSelector = parser.readAbstractGroupOrTypeArray(obj, parser.readAbstractStyleSelectorGroupArray);
     const region = parser.readChildElement(KmlTagName.Region, obj, parser.readRegion);
     const extendedData = parser.readChildElement(KmlTagName.ExtendedData, obj, parser.readExtendedData);
 
@@ -682,9 +682,10 @@ export class KMLParser {
   private readDocument(obj: any, parser: KMLParser): DocumentType {
 
     const abstractContainerTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractContainerType);
+
+    parser.kmlFactory.setSharedStyle(abstractContainerTypeValues?.styleSelector ?? []);
+
     const schema = parser.readChildElementArray(KmlTagName.Schema, obj, parser.readSchema);
-
-
     const feature = parser.readAbstractGroupOrTypeArray(obj, parser.readAbstractFeatureGroupArray);
 
     const documentType: DocumentType = {
@@ -693,6 +694,7 @@ export class KMLParser {
       feature
     }
 
+    parser.kmlFactory.resetSharedStyle();
     return parser.kmlFactory.createDocument(documentType);
   }
 
@@ -1734,11 +1736,11 @@ export class KMLParser {
     const xunits = parser.readAttribute('xunits', obj, parser.readUnitsEnumType);
     const yunits = parser.readAttribute('yunits', obj, parser.readUnitsEnumType);
 
-    if (!x) {
+    if (x === undefined) {
       throw new Error('Attribute \'x\' is required on \'vec2Type\'');
     }
 
-    if (!y) {
+    if (y === undefined) {
       throw new Error('Attribute \'y\' is required on \'vec2Type\'');
     }
 

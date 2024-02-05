@@ -1,2 +1,1 @@
-export interface Angle90Type extends Number {
-}
+export type Angle90Type = number;
