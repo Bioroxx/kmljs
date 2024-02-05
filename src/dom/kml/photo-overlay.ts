@@ -8,19 +8,19 @@ import {ShapeEnumType} from './types/shape-enum-type';
 
 export class PhotoOverlay extends AbstractOverlayGroup implements PhotoOverlayType {
 
-    rotation?: Angle180Type;
-    viewVolume?: ViewVolume;
-    imagePyramid?: ImagePyramid;
-    point?: Point;
-    shape?: ShapeEnumType;
+  rotation?: Angle180Type;
+  viewVolume?: ViewVolume;
+  imagePyramid?: ImagePyramid;
+  point?: Point;
+  shape?: ShapeEnumType;
 
-    constructor(photoOverlayType: PhotoOverlayType) {
-        super(photoOverlayType);
+  constructor(photoOverlayType: PhotoOverlayType) {
+    super(photoOverlayType);
 
-        this.rotation = photoOverlayType.rotation;
-        this.viewVolume = photoOverlayType.viewVolume;
-        this.imagePyramid = photoOverlayType.imagePyramid;
-        this.point = photoOverlayType.point;
-        this.shape = photoOverlayType.shape;
-    }
+    this.rotation = photoOverlayType.rotation;
+    this.viewVolume = photoOverlayType.viewVolume;
+    this.imagePyramid = photoOverlayType.imagePyramid;
+    this.point = photoOverlayType.point;
+    this.shape = photoOverlayType.shape;
+  }
 }

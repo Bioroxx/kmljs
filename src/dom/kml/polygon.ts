@@ -5,19 +5,19 @@ import {BoundaryType} from './types/boundary-type';
 
 export class Polygon extends AbstractGeometryGroup implements PolygonType {
 
-    extrude?: boolean;
-    tessellate?: boolean;
-    altitudeMode?: AltitudeModeGroup;
-    outerBoundaryIs?: BoundaryType;
-    innerBoundaryIs?: BoundaryType[];
+  extrude?: boolean;
+  tessellate?: boolean;
+  altitudeMode?: AltitudeModeGroup;
+  outerBoundaryIs?: BoundaryType;
+  innerBoundaryIs?: BoundaryType[];
 
-    constructor(polygonType: PolygonType) {
-        super(polygonType);
+  constructor(polygonType: PolygonType) {
+    super(polygonType);
 
-        this.extrude = polygonType.extrude;
-        this.tessellate = polygonType.tessellate;
-        this.altitudeMode = polygonType.altitudeMode;
-        this.outerBoundaryIs = polygonType.outerBoundaryIs;
-        this.innerBoundaryIs = polygonType.innerBoundaryIs;
-    }
+    this.extrude = polygonType.extrude;
+    this.tessellate = polygonType.tessellate;
+    this.altitudeMode = polygonType.altitudeMode;
+    this.outerBoundaryIs = polygonType.outerBoundaryIs;
+    this.innerBoundaryIs = polygonType.innerBoundaryIs;
+  }
 }

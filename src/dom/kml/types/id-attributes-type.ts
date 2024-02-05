@@ -3,8 +3,8 @@ import {NCName} from '../../xsd/ncname';
 
 export interface IdAttributes {
 
-    // Attributes
-    id?: ID;
-    targetId?: NCName;
-    
+  // Attributes
+  id?: ID;
+  targetId?: NCName;
+
 }

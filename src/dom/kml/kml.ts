@@ -5,13 +5,13 @@ import {KmlType} from './types/kml-type';
 
 export class Kml implements KmlType {
 
-    hint?: string;
-    networkLinkControl?: NetworkLinkControl;
-    feature?: AbstractFeatureGroup;
+  hint?: string;
+  networkLinkControl?: NetworkLinkControl;
+  feature?: AbstractFeatureGroup;
 
-    constructor(kml: KmlType) {
-        this.hint = kml.hint;
-        this.networkLinkControl = kml.networkLinkControl;
-        this.feature = kml.feature;
-    }
+  constructor(kml: KmlType) {
+    this.hint = kml.hint;
+    this.networkLinkControl = kml.networkLinkControl;
+    this.feature = kml.feature;
+  }
 }

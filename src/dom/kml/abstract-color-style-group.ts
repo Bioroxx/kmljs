@@ -5,13 +5,13 @@ import {AbstractColorStyleType} from './types/abstract-color-style-type';
 
 export abstract class AbstractColorStyleGroup extends AbstractSubStyleGroup implements AbstractColorStyleType {
 
-    color?: ColorType;
-    colorMode?: ColorModeEnumType;
+  color?: ColorType;
+  colorMode?: ColorModeEnumType;
 
-    constructor(abstractColorStyleType: AbstractColorStyleType) {
-        super(abstractColorStyleType);
+  constructor(abstractColorStyleType: AbstractColorStyleType) {
+    super(abstractColorStyleType);
 
-        this.color = abstractColorStyleType.color;
-        this.colorMode = abstractColorStyleType.colorMode;
-    }
+    this.color = abstractColorStyleType.color;
+    this.colorMode = abstractColorStyleType.colorMode;
+  }
 }

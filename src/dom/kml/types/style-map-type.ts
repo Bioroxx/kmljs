@@ -3,6 +3,6 @@ import {PairType} from './pair-type';
 
 export interface StyleMapType extends AbstractStyleSelectorType {
 
-    pair: PairType[];
+  pair: PairType[];
 
 }

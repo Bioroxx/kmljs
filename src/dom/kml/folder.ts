@@ -4,10 +4,10 @@ import {AbstractFeatureGroup} from './abstract-feature-group';
 
 export class Folder extends AbstractContainerGroup implements FolderType {
 
-    feature: AbstractFeatureGroup[];
+  feature: AbstractFeatureGroup[];
 
-    constructor(folderType: FolderType) {
-        super(folderType);
-        this.feature = folderType.feature;
-    }
+  constructor(folderType: FolderType) {
+    super(folderType);
+    this.feature = folderType.feature;
+  }
 }

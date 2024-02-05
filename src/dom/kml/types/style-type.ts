@@ -8,12 +8,12 @@ import {ListStyleType} from './list-style-type';
 
 export interface StyleType extends AbstractStyleSelectorType {
 
-    // Child elements
-    iconStyle?: IconStyleType;
-    labelStyle?: LabelStyleType;
-    lineStyle?: LineStyleType;
-    polyStyle?: PolyStyleType;
-    balloonStyle?: BalloonStyleType;
-    listStyle?: ListStyleType;
+  // Child elements
+  iconStyle?: IconStyleType;
+  labelStyle?: LabelStyleType;
+  lineStyle?: LineStyleType;
+  polyStyle?: PolyStyleType;
+  balloonStyle?: BalloonStyleType;
+  listStyle?: ListStyleType;
 
 }

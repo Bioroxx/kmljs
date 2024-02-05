@@ -4,14 +4,14 @@ import {ID} from '../xsd/id';
 
 export class Schema implements SchemaType {
 
-    id?: ID;
-    name?: string;
-    simpleField: SimpleField[];
+  id?: ID;
+  name?: string;
+  simpleField: SimpleField[];
 
-    constructor(schemaType: SchemaType) {
+  constructor(schemaType: SchemaType) {
 
-        this.id = schemaType.id;
-        this.name = schemaType.name;
-        this.simpleField = schemaType.simpleField;
-    }
+    this.id = schemaType.id;
+    this.name = schemaType.name;
+    this.simpleField = schemaType.simpleField;
+  }
 }

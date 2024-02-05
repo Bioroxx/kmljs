@@ -5,9 +5,9 @@ import {AbstractStyleSelectorType} from './abstract-style-selector-type';
 
 export interface PairType extends AbstractObjectType {
 
-    // Child elements
-    key?: StyleStateEnumType;
-    styleUrl?: AnyURI;
-    styleSelector?: AbstractStyleSelectorType;
+  // Child elements
+  key?: StyleStateEnumType;
+  styleUrl?: AnyURI;
+  styleSelector?: AbstractStyleSelectorType;
 
 }

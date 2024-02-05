@@ -1,4 +1,4 @@
 export enum GridOriginEnumType {
-    lowerLeft = 'lowerLeft',
-    upperLeft = 'upperLeft'
+  lowerLeft = 'lowerLeft',
+  upperLeft = 'upperLeft'
 }

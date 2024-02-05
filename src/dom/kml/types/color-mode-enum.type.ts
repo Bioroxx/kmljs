@@ -1,4 +1,4 @@
 export enum ColorModeEnumType {
-    normal = 'normal',
-    random = 'random'
+  normal = 'normal',
+  random = 'random'
 }

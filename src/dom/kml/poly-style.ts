@@ -3,13 +3,13 @@ import {PolyStyleType} from './types/poly-style-type';
 
 export class PolyStyle extends AbstractColorStyleGroup implements PolyStyleType {
 
-    fill?: boolean;
-    outline?: boolean;
+  fill?: boolean;
+  outline?: boolean;
 
-    constructor(polyStyleType: PolyStyleType) {
-        super(polyStyleType);
+  constructor(polyStyleType: PolyStyleType) {
+    super(polyStyleType);
 
-        this.fill = polyStyleType.fill;
-        this.outline = polyStyleType.outline;
-    }
+    this.fill = polyStyleType.fill;
+    this.outline = polyStyleType.outline;
+  }
 }

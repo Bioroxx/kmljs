@@ -5,15 +5,15 @@ import {CoordinatesType} from './types/coordinates-type';
 
 export class Point extends AbstractGeometryGroup implements PointType {
 
-    extrude?: boolean;
-    altitudeMode?: AltitudeModeGroup;
-    coordinates?: CoordinatesType;
+  extrude?: boolean;
+  altitudeMode?: AltitudeModeGroup;
+  coordinates?: CoordinatesType;
 
-    constructor(pointType: PointType) {
-        super(pointType);
+  constructor(pointType: PointType) {
+    super(pointType);
 
-        this.extrude = pointType.extrude;
-        this.altitudeMode = pointType.altitudeMode;
-        this.coordinates = pointType.coordinates;
-    }
+    this.extrude = pointType.extrude;
+    this.altitudeMode = pointType.altitudeMode;
+    this.coordinates = pointType.coordinates;
+  }
 }

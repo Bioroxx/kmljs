@@ -1,3 +1,1 @@
-export interface ColorType extends String {
-    
-}
+export type ColorType = string

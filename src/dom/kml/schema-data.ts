@@ -5,13 +5,13 @@ import {AnyURI} from '../xsd/anyURI';
 
 export class SchemaData extends AbstractObjectGroup implements SchemaDataType {
 
-    schemaUrl?: AnyURI;
-    simpleData: SimpleData[];
+  schemaUrl?: AnyURI;
+  simpleData: SimpleData[];
 
-    constructor(schemaDataType: SchemaDataType) {
-        super(schemaDataType);
+  constructor(schemaDataType: SchemaDataType) {
+    super(schemaDataType);
 
-        this.schemaUrl = schemaDataType.schemaUrl;
-        this.simpleData = schemaDataType.simpleData;
-    }
+    this.schemaUrl = schemaDataType.schemaUrl;
+    this.simpleData = schemaDataType.simpleData;
+  }
 }

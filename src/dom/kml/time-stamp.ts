@@ -4,11 +4,11 @@ import {DateTimeType} from './types/date-time-type';
 
 export class TimeStamp extends AbstractTimePrimitiveGroup implements TimeStampType {
 
-    when?: DateTimeType;
+  when?: DateTimeType;
 
-    constructor(timeStampType: TimeStampType) {
-        super(timeStampType);
+  constructor(timeStampType: TimeStampType) {
+    super(timeStampType);
 
-        this.when = timeStampType.when;
-    }
+    this.when = timeStampType.when;
+  }
 }

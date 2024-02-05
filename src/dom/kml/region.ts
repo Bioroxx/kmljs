@@ -5,13 +5,13 @@ import {RegionType} from './types/region-type';
 
 export class Region extends AbstractObjectGroup implements RegionType {
 
-    latLonAltBox?: LatLonAltBox;
-    lod?: Lod;
+  latLonAltBox?: LatLonAltBox;
+  lod?: Lod;
 
-    constructor(regionType: RegionType) {
-        super(regionType);
+  constructor(regionType: RegionType) {
+    super(regionType);
 
-        this.latLonAltBox = regionType.latLonAltBox;
-        this.lod = regionType.lod;
-    }
+    this.latLonAltBox = regionType.latLonAltBox;
+    this.lod = regionType.lod;
+  }
 }

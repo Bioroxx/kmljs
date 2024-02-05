@@ -5,8 +5,8 @@ import {ChangeType} from './change-type';
 
 export interface UpdateType {
 
-    // Child elements
-    targetHref: AnyURI;
-    createDeleteChange?: CreateType | DeleteType | ChangeType;
+  // Child elements
+  targetHref: AnyURI;
+  createDeleteChange?: CreateType | DeleteType | ChangeType;
 
 }

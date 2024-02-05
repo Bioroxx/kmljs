@@ -4,11 +4,11 @@ import {StyleMapType} from './types/style-map-type';
 
 export class StyleMap extends AbstractStyleSelectorGroup implements StyleMapType {
 
-    pair: Pair[];
+  pair: Pair[];
 
-    constructor(styleMapType: StyleMapType) {
-        super(styleMapType);
+  constructor(styleMapType: StyleMapType) {
+    super(styleMapType);
 
-        this.pair = styleMapType.pair;
-    }
+    this.pair = styleMapType.pair;
+  }
 }

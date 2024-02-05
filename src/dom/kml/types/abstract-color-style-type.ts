@@ -4,8 +4,8 @@ import {ColorModeEnumType} from './color-mode-enum.type';
 
 export interface AbstractColorStyleType extends AbstractSubStyleType {
 
-    // Child elements
-    color?: ColorType;
-    colorMode?: ColorModeEnumType;
+  // Child elements
+  color?: ColorType;
+  colorMode?: ColorModeEnumType;
 
 }

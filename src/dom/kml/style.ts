@@ -9,21 +9,21 @@ import {StyleType} from './types/style-type';
 
 export class Style extends AbstractStyleSelectorGroup implements StyleType {
 
-    iconStyle?: IconStyle;
-    labelStyle?: LabelStyle;
-    lineStyle?: LineStyle;
-    polyStyle?: PolyStyle;
-    balloonStyle?: BalloonStyle;
-    listStyle?: ListStyle;
+  iconStyle?: IconStyle;
+  labelStyle?: LabelStyle;
+  lineStyle?: LineStyle;
+  polyStyle?: PolyStyle;
+  balloonStyle?: BalloonStyle;
+  listStyle?: ListStyle;
 
-    constructor(styleType: StyleType) {
-        super(styleType);
+  constructor(styleType: StyleType) {
+    super(styleType);
 
-        this.iconStyle = styleType.iconStyle;
-        this.labelStyle = styleType.labelStyle;
-        this.lineStyle = styleType.lineStyle;
-        this.polyStyle = styleType.polyStyle;
-        this.balloonStyle = styleType.balloonStyle;
-        this.listStyle = styleType.listStyle;
-    }
+    this.iconStyle = styleType.iconStyle;
+    this.labelStyle = styleType.labelStyle;
+    this.lineStyle = styleType.lineStyle;
+    this.polyStyle = styleType.polyStyle;
+    this.balloonStyle = styleType.balloonStyle;
+    this.listStyle = styleType.listStyle;
+  }
 }

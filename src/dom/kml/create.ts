@@ -3,9 +3,9 @@ import {CreateType} from './types/create-type';
 
 export class Create implements CreateType {
 
-    container: AbstractContainerGroup[];
+  container: AbstractContainerGroup[];
 
-    constructor(createType: CreateType) {
-        this.container = createType.container;
-    }
+  constructor(createType: CreateType) {
+    this.container = createType.container;
+  }
 }

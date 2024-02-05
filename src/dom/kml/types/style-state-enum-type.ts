@@ -1,4 +1,4 @@
 export enum StyleStateEnumType {
-    normal = 'normal',
-    highlight = 'highlight'
+  normal = 'normal',
+  highlight = 'highlight'
 }

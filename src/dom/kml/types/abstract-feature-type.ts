@@ -10,22 +10,22 @@ import {ExtendedDataType} from './extended-data-type';
 
 export interface AbstractFeatureType extends AbstractObjectType {
 
-    // Child elements
-    name?: string;
-    visibility?: boolean;
-    open?: boolean;
-    atomAuthor?: AtomAuthor;
-    atomLink?: AtomLink;
-    address?: string;
-    //TODO: xal:AddressDetails
-    phoneNumber?: string;
-    snippet?: string;
-    description?: string;
-    view?: AbstractViewType;
-    timePrimitive?: AbstractTimePrimitiveType;
-    styleUrl?: AnyURI;
-    styleSelector?: AbstractStyleSelectorType[];
-    region?: RegionType;
-    extendedData?: ExtendedDataType;
+  // Child elements
+  name?: string;
+  visibility?: boolean;
+  open?: boolean;
+  atomAuthor?: AtomAuthor;
+  atomLink?: AtomLink;
+  address?: string;
+  //TODO: xal:AddressDetails
+  phoneNumber?: string;
+  snippet?: string;
+  description?: string;
+  view?: AbstractViewType;
+  timePrimitive?: AbstractTimePrimitiveType;
+  styleUrl?: AnyURI;
+  styleSelector?: AbstractStyleSelectorType[];
+  region?: RegionType;
+  extendedData?: ExtendedDataType;
 
 }

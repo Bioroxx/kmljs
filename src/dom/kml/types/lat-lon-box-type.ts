@@ -3,7 +3,7 @@ import {Angle180Type} from './angle-180-type';
 
 export interface LatLonBoxType extends AbstractLatLonBoxType {
 
-    // Child elements
-    rotation?: Angle180Type;
+  // Child elements
+  rotation?: Angle180Type;
 
 }

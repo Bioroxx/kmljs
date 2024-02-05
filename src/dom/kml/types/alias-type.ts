@@ -3,8 +3,8 @@ import {AnyURI} from '../../xsd/anyURI';
 
 export interface AliasType extends AbstractObjectType {
 
-    // Child elements
-    targetHref?: AnyURI;
-    sourceHref?: AnyURI;
+  // Child elements
+  targetHref?: AnyURI;
+  sourceHref?: AnyURI;
 
 }
