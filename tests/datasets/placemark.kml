@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml
+  xmlns="http://www.opengis.net/kml/2.2"
+  hint="This is a hint">
+  <Placemark id="placemarkId">
+    <name>placemarkName</name>
+    <visibility>true</visibility>
+    <open>true</open>
+    <address>placemarkAddress</address>
+    <phoneNumber>+1-111-111-1111</phoneNumber>
+    <snippet>placemarkSnippet</snippet>
+    <description>placemarkDescription</description>
+    <LookAt>
+      <longitude>-90.0</longitude>
+      <latitude>48.0</latitude>
+      <range>440.0</range>
+      <tilt>8.0</tilt>
+      <heading>2.0</heading>
+    </LookAt>
+    <TimeStamp>
+      <when>2024-01-01</when>
+    </TimeStamp>
+    <Style>
+      <IconStyle>
+        <scale>0.2</scale>
+        <heading>180.0</heading>
+        <Icon>
+          <href>https://example.com/icon.png</href>
+        </Icon>
+        <hotSpot x="0.0" y="50" xunits="pixels" yunits="pixels"></hotSpot>
+      </IconStyle>
+      <LabelStyle>
+        <color>ff000000</color>
+        <colorMode>normal</colorMode>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff000000</color>
+        <colorMode>random</colorMode>
+        <width>2.0</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>ff000000</color>
+        <colorMode>random</colorMode>
+        <fill>true</fill>
+        <outline>true</outline>
+      </PolyStyle>
+      <BalloonStyle>
+        <bgColor>ff777777</bgColor>
+        <textColor>ff000000</textColor>
+        <text>placemarkStyleBalloonStyleText</text>
+        <displayMode>default</displayMode>
+      </BalloonStyle>
+      <ListStyle>
+        <listItemType>check</listItemType>
+        <bgColor>ff777777</bgColor>
+        <ItemIcon>
+          <state>open</state>
+          <href>https://example.com/icon.png</href>
+        </ItemIcon>
+        <maxSnippetLines>5</maxSnippetLines>
+      </ListStyle>
+    </Style>
+    <Region>
+      <LatLonAltBox>
+        <north>10.0</north>
+        <south>-10.0</south>
+        <east>10.0</east>
+        <west>-10.0</west>
+        <minAltitude>0</minAltitude>
+        <maxAltitude>100</maxAltitude>
+        <altitudeMode>absolute</altitudeMode>
+      </LatLonAltBox>
+      <Lod>
+        <minLodPixels>1.0</minLodPixels>
+        <maxLodPixels>2.0</maxLodPixels>
+        <minFadeExtent>1.0</minFadeExtent>
+        <maxFadeExtent>2.0</maxFadeExtent>
+      </Lod>
+    </Region>
+    <ExtendedData>
+      <Data name="placemarkExtendedDataDataName">
+        <displayName>placemarkExtendedDataDataDisplayName</displayName>
+        <value>placemarkExtendedDataDataValue</value>
+      </Data>
+      <SchemaData schemaUrl="placemarkExtendedDataSchemaData">
+        <SimpleData name="placemarkExtendedDataSchemaDataSimpleDataName">
+          placemarkExtendedDataSchemaDataSimpleDataTextContent
+        </SimpleData>
+      </SchemaData>
+    </ExtendedData>
+    <Point>
+      <coordinates>-90.0,48.0</coordinates>
+    </Point>
+  </Placemark>
+</kml>
