@@ -1,1 +1,1 @@
-export type NCName = String;
+export type NCName = string;

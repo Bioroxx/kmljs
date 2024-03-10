@@ -9,6 +9,6 @@ export abstract class AbstractObjectGroup implements AbstractObjectType {
 
   constructor(abstractObjectTypeValues: AbstractObjectType) {
     this.id = abstractObjectTypeValues.id;
-    this.targetId = abstractObjectTypeValues.id;
+    this.targetId = abstractObjectTypeValues.targetId;
   }
 }

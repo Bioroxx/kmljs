@@ -8,7 +8,7 @@ export interface ListStyleType extends AbstractSubStyleType {
   // Child elements
   listItemType?: ListItemTypeEnumType;
   bgColor?: ColorType;
-  itemIcon?: ItemIconType;
+  itemIcon?: ItemIconType[];
   maxSnippetLines?: number;
 
 }

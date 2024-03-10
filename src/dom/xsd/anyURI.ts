@@ -1,1 +1,1 @@
-export type AnyURI = String;
+export type AnyURI = string;
