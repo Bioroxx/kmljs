@@ -35,20 +35,20 @@ import {readFileSync} from 'fs';
 
 class MyPlacemark extends Placemark {
 
-    constructor(placemarkType: PlacemarkType) {
-        super(placemarkType);
-    }
+  constructor(placemarkType: PlacemarkType) {
+    super(placemarkType);
+  }
 
-    render(): void {
-        // Your rendering code...
-    }
+  render(): void {
+    // Your rendering code...
+  }
 }
 
 class CustomKMLFactory extends KMLFactory {
 
-    override createPlacemark(placemarkType: PlacemarkType): PlacemarkType {
-        return new MyPlacemark(placemarkType);
-    }
+  override createPlacemark(placemarkType: PlacemarkType): PlacemarkType {
+    return new MyPlacemark(placemarkType);
+  }
 }
 
 const kmlFileString = readFileSync('./my-kml-file.kml', 'utf-8');
@@ -60,7 +60,8 @@ const kml = kmlParser.parse(kmlFileString);
 ## Roadmap
 
 - [ ] Parsing
-    - [x] `kml`, `atom` namespace elements
+    - [x] `kml` namespace elements
+    - [ ] `atom` namespace elements
     - [ ] `xal` namespace elements
 - [ ] Parsing tests
 - [ ] Serialization
