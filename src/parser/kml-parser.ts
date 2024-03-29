@@ -110,7 +110,7 @@ export class KMLParser {
 
   public parse(kml: string): KmlType | undefined {
     const obj = this.xmlParser.parse(kml);
-    return this.readChildElement(KmlTagName.kml, obj, this.readKmlType);
+    return this.readChildElement(KmlTagName.kml, obj, this.readKml);
   }
 
   protected readTextContent(obj: any): string {
@@ -195,21 +195,6 @@ export class KMLParser {
     }
 
     return readMethod(parent, this);
-  }
-
-  private readKmlType(obj: any, parser: KMLParser): KmlType {
-
-    const hint = parser.readAttribute('hint', obj, parser.readTextContent);
-    const networkLinkControl = parser.readChildElement(KmlTagName.NetworkLinkControl, obj, parser.readNetworkLinkControl);
-    const feature = parser.readAbstractGroupOrType(obj, parser.readAbstractFeatureGroup);
-
-    const kml: KmlType = {
-      hint,
-      networkLinkControl,
-      feature
-    }
-
-    return parser.kmlFactory.createKml(kml);
   }
 
   private readAbstractObjectType(obj: any, parser: KMLParser): AbstractObjectType {
@@ -651,6 +636,21 @@ export class KMLParser {
     );
 
     return abstractTimePrimitiveGroupArray;
+  }
+
+  private readKml(obj: any, parser: KMLParser): KmlType {
+
+    const hint = parser.readAttribute('hint', obj, parser.readTextContent);
+    const networkLinkControl = parser.readChildElement(KmlTagName.NetworkLinkControl, obj, parser.readNetworkLinkControl);
+    const feature = parser.readAbstractGroupOrType(obj, parser.readAbstractFeatureGroup);
+
+    const kml: KmlType = {
+      hint,
+      networkLinkControl,
+      feature
+    }
+
+    return parser.kmlFactory.createKml(kml);
   }
 
   private readPlacemark(obj: any, parser: KMLParser): PlacemarkType {
