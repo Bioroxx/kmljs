@@ -649,7 +649,7 @@ export class KMLParser {
 
   private readKml(obj: any, parser: KMLParser): KmlType {
 
-    const hint = parser.readAttribute('hint', obj, parser.readTextContent);
+    const hint = parser.readAttribute('hint', obj, parser.readContent);
     const networkLinkControl = parser.readChildElement(KmlTagName.NetworkLinkControl, obj, parser.readNetworkLinkControl);
     const feature = parser.readAbstractGroupOrType(obj, parser.readAbstractFeatureGroup);
 
