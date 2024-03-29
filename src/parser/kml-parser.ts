@@ -113,8 +113,17 @@ export class KMLParser {
     return this.readChildElement(KmlTagName.kml, obj, this.readKml);
   }
 
-  protected readTextContent(obj: any): string {
+  protected readContent(obj: any): string {
     return '' + obj;
+  }
+
+  protected readTextContent(element: any): string | undefined {
+
+    if (element === undefined) {
+      return undefined;
+    }
+
+    return element['#text'];
   }
 
   protected readChildElement<T>(
@@ -212,16 +221,16 @@ export class KMLParser {
 
     const abstractObjectTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractObjectType);
 
-    const name = parser.readChildElement('name', obj, parser.readTextContent);
+    const name = parser.readChildElement('name', obj, parser.readContent);
     const visibility = parser.readChildElement('visibility', obj, parser.readXsdBoolean);
     const open = parser.readChildElement('open', obj, parser.readXsdBoolean);
     // TODO: atom:author
     // TODO: atom:link
-    const address = parser.readChildElement('address', obj, parser.readTextContent);
+    const address = parser.readChildElement('address', obj, parser.readContent);
     // TODO: xal:AddressDetails
-    const phoneNumber = parser.readChildElement('phoneNumber', obj, parser.readTextContent);
-    const snippet = parser.readChildElement('snippet', obj, parser.readTextContent);
-    const description = parser.readChildElement('description', obj, parser.readTextContent);
+    const phoneNumber = parser.readChildElement('phoneNumber', obj, parser.readContent);
+    const snippet = parser.readChildElement('snippet', obj, parser.readContent);
+    const description = parser.readChildElement('description', obj, parser.readContent);
     const view = parser.readAbstractGroupOrType(obj, parser.readAbstractViewGroup);
     const timePrimitive = parser.readAbstractGroupOrType(obj, parser.readAbstractTimePrimitiveGroup);
     const styleUrl = parser.readChildElement('styleUrl', obj, parser.readXsdAnyUri);
@@ -326,7 +335,7 @@ export class KMLParser {
   private readBasicLinkType(obj: any, parser: KMLParser): BasicLinkType {
 
     const abstractObjectTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractObjectType);
-    const href = parser.readChildElement('href', obj, parser.readTextContent);
+    const href = parser.readChildElement('href', obj, parser.readContent);
 
     return {
       ...abstractObjectTypeValues,
@@ -342,8 +351,8 @@ export class KMLParser {
     const viewRefreshMode = parser.readChildElement('viewRefreshMode', obj, parser.readViewRefreshModeEnumType);
     const viewRefreshTime = parser.readChildElement('viewRefreshTime', obj, parser.readXsdDouble);
     const viewBoundScale = parser.readChildElement('viewBoundScale', obj, parser.readXsdDouble);
-    const viewFormat = parser.readChildElement('viewFormat', obj, parser.readTextContent);
-    const httpQuery = parser.readChildElement('httpQuery', obj, parser.readTextContent);
+    const viewFormat = parser.readChildElement('viewFormat', obj, parser.readContent);
+    const httpQuery = parser.readChildElement('httpQuery', obj, parser.readContent);
 
     return {
       ...basicLinkTypeValues,
@@ -701,7 +710,7 @@ export class KMLParser {
   private readSchema(obj: any, parser: KMLParser): SchemaType {
 
     const id = parser.readAttribute('id', obj, parser.readXsdID);
-    const name = parser.readChildElement('name', obj, parser.readTextContent);
+    const name = parser.readAttribute('name', obj, parser.readContent);
     const simpleField = parser.readChildElementArray(KmlTagName.SimpleField, obj, parser.readSimpleField);
 
     const schemaType: SchemaType = {
@@ -715,9 +724,9 @@ export class KMLParser {
 
   private readSimpleField(obj: any, parser: KMLParser): SimpleFieldType {
 
-    const type = parser.readAttribute('type', obj, parser.readTextContent);
-    const name = parser.readAttribute('name', obj, parser.readTextContent);
-    const displayName = parser.readChildElement('displayName', obj, parser.readTextContent);
+    const type = parser.readAttribute('type', obj, parser.readContent);
+    const name = parser.readAttribute('name', obj, parser.readContent);
+    const displayName = parser.readChildElement('displayName', obj, parser.readContent);
 
     const simpleFieldType: SimpleFieldType = {
       type,
@@ -732,7 +741,7 @@ export class KMLParser {
 
     const abstractGeometryTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractGeometryType);
     const extrude = parser.readChildElement('extrude', obj, parser.readXsdBoolean);
-    const tessellate = parser.readChildElement('tessallate', obj, parser.readXsdBoolean);
+    const tessellate = parser.readChildElement('tessellate', obj, parser.readXsdBoolean);
     const altitudeMode = parser.readChildElement('altitudeMode', obj, parser.readAltitudeModeGroup);
     const coordinates = parser.readChildElement('coordinates', obj, parser.readCoordinates);
 
@@ -897,8 +906,8 @@ export class KMLParser {
 
     const abstractObjectTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractObjectType);
 
-    const targetHref = parser.readChildElement('targetHref', obj, parser.readTextContent);
-    const sourceHref = parser.readChildElement('sourceHref', obj, parser.readTextContent);
+    const targetHref = parser.readChildElement('targetHref', obj, parser.readContent);
+    const sourceHref = parser.readChildElement('sourceHref', obj, parser.readContent);
 
     const aliasType: AliasType = {
       ...abstractObjectTypeValues,
@@ -1209,7 +1218,7 @@ export class KMLParser {
     const abstractSubStyleTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractSubStyleType);
     const bgColor = parser.readChildElement('bgColor', obj, parser.readColorType);
     const textColor = parser.readChildElement('textColor', obj, parser.readColorType);
-    const text = parser.readChildElement('text', obj, parser.readTextContent);
+    const text = parser.readChildElement('text', obj, parser.readContent);
     const displayMode = parser.readChildElement('displayMode', obj, parser.readDisplayModeEnumType);
 
     const balloonStyleType: BalloonStyleType = {
@@ -1289,7 +1298,7 @@ export class KMLParser {
     const abstractColorStyleTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractColorStyleType);
     const listItemType = parser.readChildElement('listItemType', obj, parser.readListItemTypeEnumType);
     const bgColor = parser.readChildElement('bgColor', obj, parser.readColorType);
-    const itemIcon = parser.readChildElement(KmlTagName.ItemIcon, obj, parser.readItemIcon);
+    const itemIcon = parser.readChildElementArray(KmlTagName.ItemIcon, obj, parser.readItemIcon);
     const maxSnippetLines = parser.readChildElement('maxSnippetLines', obj, parser.readXsdInt);
 
     const listStyleType: ListStyleType = {
@@ -1307,7 +1316,7 @@ export class KMLParser {
 
     const abstractObjectTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractObjectType);
     const state = parser.readChildElement('state', obj, parser.readItemIconStateType);
-    const href = parser.readChildElement('href', obj, parser.readTextContent);
+    const href = parser.readChildElement('href', obj, parser.readContent);
 
     const itemIconType: ItemIconType = {
       ...abstractObjectTypeValues,
@@ -1321,7 +1330,7 @@ export class KMLParser {
   private readRegion(obj: any, parser: KMLParser): RegionType {
 
     const abstractObjectTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractObjectType);
-    const latLonAltBox = parser.readChildElement(KmlTagName.LatLonAltBox, obj, parser.readLatLonBox);
+    const latLonAltBox = parser.readChildElement(KmlTagName.LatLonAltBox, obj, parser.readLatLonAltBox);
     const lod = parser.readChildElement(KmlTagName.Lod, obj, parser.readLod);
 
     const regionType: RegionType = {
@@ -1388,9 +1397,9 @@ export class KMLParser {
 
     const abstractObjectTypeValues = parser.readAbstractGroupOrType(obj, parser.readAbstractObjectType);
 
-    const name = parser.readAttribute('name', obj, parser.readTextContent);
-    const displayName = parser.readChildElement('displayName', obj, parser.readTextContent);
-    const value = parser.readChildElement('value', obj, parser.readTextContent);
+    const name = parser.readAttribute('name', obj, parser.readContent);
+    const displayName = parser.readChildElement('displayName', obj, parser.readContent);
+    const value = parser.readChildElement('value', obj, parser.readContent);
 
     const dataType: DataType = {
       ...abstractObjectTypeValues,
@@ -1417,13 +1426,14 @@ export class KMLParser {
     return parser.kmlFactory.createSchemaData(schemaDataType);
   }
 
-  // TODO: parse text content
   private readSimpleData(obj: any, parser: KMLParser): SimpleDataType {
 
-    const name = parser.readAttribute('name', obj, parser.readTextContent);
+    const name = parser.readAttribute('name', obj, parser.readContent);
+    const textContent = parser.readTextContent(obj);
 
     const simpleDataType: SimpleDataType = {
       name,
+      textContent
     };
 
     return parser.kmlFactory.createSimpleData(simpleDataType);
@@ -1433,11 +1443,11 @@ export class KMLParser {
 
     const minRefreshPeriod = parser.readChildElement('minRefreshPeriod', obj, parser.readXsdDouble);
     const maxSessionLength = parser.readChildElement('maxSessionLength', obj, parser.readXsdDouble);
-    const cookie = parser.readChildElement('cookie', obj, parser.readTextContent);
-    const message = parser.readChildElement('message', obj, parser.readTextContent);
-    const linkName = parser.readChildElement('linkName', obj, parser.readTextContent);
-    const linkDescription = parser.readChildElement('linkDescription', obj, parser.readTextContent);
-    const linkSnippet = parser.readChildElement('linkSnippet', obj, parser.readTextContent);
+    const cookie = parser.readChildElement('cookie', obj, parser.readContent);
+    const message = parser.readChildElement('message', obj, parser.readContent);
+    const linkName = parser.readChildElement('linkName', obj, parser.readContent);
+    const linkDescription = parser.readChildElement('linkDescription', obj, parser.readContent);
+    const linkSnippet = parser.readChildElement('linkSnippet', obj, parser.readContent);
     const expires = parser.readChildElement('expires', obj, parser.readDateTimeType);
     const update = parser.readChildElement(KmlTagName.Update, obj, parser.readUpdate);
     const view = parser.readAbstractGroupOrType(obj, parser.readAbstractViewGroup);
@@ -1533,7 +1543,7 @@ export class KMLParser {
 
   private readXsdInt(obj: any, parser: KMLParser): number {
 
-    const intString = parser.readTextContent(obj);
+    const intString = parser.readContent(obj);
     const int = parseInt(intString);
 
     if (isNaN(int)) {
@@ -1545,7 +1555,7 @@ export class KMLParser {
 
   private readXsdDouble(obj: any, parser: KMLParser): number {
 
-    const doubleString = parser.readTextContent(obj);
+    const doubleString = parser.readContent(obj);
     const double = parseFloat(doubleString);
 
     if (isNaN(double)) {
@@ -1556,20 +1566,20 @@ export class KMLParser {
   }
 
   private readXsdID(obj: any, parser: KMLParser): ID {
-    return parser.readTextContent(obj);
+    return parser.readContent(obj);
   }
 
   private readXsdNCName(obj: any, parser: KMLParser): NCName {
-    return parser.readTextContent(obj);
+    return parser.readContent(obj);
   }
 
   private readXsdAnyUri(obj: any, parser: KMLParser): AnyURI {
-    return parser.readTextContent(obj);
+    return parser.readContent(obj);
   }
 
   private readAltitudeModeGroup(obj: any, parser: KMLParser): AltitudeModeGroup {
 
-    const altitudeModeEnumTypeString = parser.readTextContent(obj);
+    const altitudeModeEnumTypeString = parser.readContent(obj);
 
     if (altitudeModeEnumTypeString === AltitudeModeEnumType.absolute) {
       return AltitudeModeEnumType.absolute;
@@ -1617,7 +1627,7 @@ export class KMLParser {
 
   private readColorType(obj: any, parser: KMLParser): ColorType {
 
-    const colorTypeString = parser.readTextContent(obj);
+    const colorTypeString = parser.readContent(obj);
 
     if (colorTypeString.length !== 8) {
       throw new Error('Could not parse as colorType: ' + obj);
@@ -1628,7 +1638,7 @@ export class KMLParser {
 
   private readColorModeEnumType(obj: any, parser: KMLParser): ColorModeEnumType {
 
-    const colorModeEnumTypeString = parser.readTextContent(obj);
+    const colorModeEnumTypeString = parser.readContent(obj);
 
     if (colorModeEnumTypeString === ColorModeEnumType.normal) {
       return ColorModeEnumType.normal;
@@ -1641,13 +1651,13 @@ export class KMLParser {
 
   // TODO: parse correctly
   private readDateTimeType(obj: any, parser: KMLParser): DateTimeType {
-    const dateTimeTypeString = parser.readTextContent(obj);
+    const dateTimeTypeString = parser.readContent(obj);
     return new Date(dateTimeTypeString);
   }
 
   private readDisplayModeEnumType(obj: any, parser: KMLParser): DisplayModeEnumType {
 
-    const displayModeEnumTypeString = parser.readTextContent(obj);
+    const displayModeEnumTypeString = parser.readContent(obj);
 
     if (displayModeEnumTypeString === DisplayModeEnumType.default) {
       return DisplayModeEnumType.default;
@@ -1660,7 +1670,7 @@ export class KMLParser {
 
   private readGridOriginEnumType(obj: any, parser: KMLParser): GridOriginEnumType {
 
-    const gridOriginEnumTypeString = parser.readTextContent(obj);
+    const gridOriginEnumTypeString = parser.readContent(obj);
 
     if (gridOriginEnumTypeString === GridOriginEnumType.lowerLeft) {
       return GridOriginEnumType.lowerLeft;
@@ -1673,7 +1683,7 @@ export class KMLParser {
 
   private readRefreshModeEnumType(obj: any, parser: KMLParser): RefreshModeEnumType {
 
-    const refreshModeEnumTypeString = parser.readTextContent(obj);
+    const refreshModeEnumTypeString = parser.readContent(obj);
 
     if (refreshModeEnumTypeString === RefreshModeEnumType.onChange) {
       return RefreshModeEnumType.onChange;
@@ -1688,7 +1698,7 @@ export class KMLParser {
 
   private readShapeEnumType(obj: any, parser: KMLParser): ShapeEnumType {
 
-    const readShapeEnumTypeString = parser.readTextContent(obj);
+    const readShapeEnumTypeString = parser.readContent(obj);
 
     if (readShapeEnumTypeString === ShapeEnumType.rectangle) {
       return ShapeEnumType.rectangle;
@@ -1703,7 +1713,7 @@ export class KMLParser {
 
   private readStyleStateEnumType(obj: any, parser: KMLParser): StyleStateEnumType {
 
-    const styleStateEnumTypeString = parser.readTextContent(obj);
+    const styleStateEnumTypeString = parser.readContent(obj);
 
     if (styleStateEnumTypeString === StyleStateEnumType.normal) {
       return StyleStateEnumType.normal;
@@ -1716,7 +1726,7 @@ export class KMLParser {
 
   private readUnitsEnumType(obj: any, parser: KMLParser): UnitsEnumType {
 
-    const unitsEnumTypeString = parser.readTextContent(obj);
+    const unitsEnumTypeString = parser.readContent(obj);
 
     if (unitsEnumTypeString === UnitsEnumType.pixels) {
       return UnitsEnumType.pixels;
@@ -1754,7 +1764,7 @@ export class KMLParser {
 
   private readViewRefreshModeEnumType(obj: any, parser: KMLParser): ViewRefreshModeEnumType {
 
-    const viewRefreshModeEnumTypeString = parser.readTextContent(obj);
+    const viewRefreshModeEnumTypeString = parser.readContent(obj);
 
     if (viewRefreshModeEnumTypeString === ViewRefreshModeEnumType.never) {
       return ViewRefreshModeEnumType.never;
@@ -1771,7 +1781,7 @@ export class KMLParser {
 
   private readListItemTypeEnumType(obj: any, parser: KMLParser): ListItemTypeEnumType {
 
-    const listItemTypeEnumTypeString = parser.readTextContent(obj);
+    const listItemTypeEnumTypeString = parser.readContent(obj);
 
     if (listItemTypeEnumTypeString === ListItemTypeEnumType.check) {
       return ListItemTypeEnumType.check;
@@ -1788,7 +1798,7 @@ export class KMLParser {
 
   private readItemIconStateType(obj: any, parser: KMLParser): ItemIconStateType {
 
-    let itemIconStateTypeString = parser.readTextContent(obj);
+    let itemIconStateTypeString = parser.readContent(obj);
 
     // replace newlines and whitespaces with a single whitespace
     itemIconStateTypeString = itemIconStateTypeString.replace(/\n*\s+/g, ' ');
@@ -1838,7 +1848,7 @@ export class KMLParser {
 
   private readCoordinates(obj: any, parser: KMLParser): CoordinatesType {
 
-    let coordinatesString = parser.readTextContent(obj);
+    let coordinatesString = parser.readContent(obj);
 
     // replace newlines and whitespaces with a single whitespace
     coordinatesString = coordinatesString.replace(/\n*\s+/g, ' ');
