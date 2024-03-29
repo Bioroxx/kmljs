@@ -9,7 +9,7 @@ export abstract class AbstractLatLonBox extends AbstractObjectGroup implements A
   east?: Angle180Type;
   west?: Angle180Type;
 
-  constructor(abstractLatLonBoxType: AbstractLatLonBoxType) {
+  protected constructor(abstractLatLonBoxType: AbstractLatLonBoxType) {
     super(abstractLatLonBoxType);
 
     this.north = abstractLatLonBoxType.north;

@@ -28,7 +28,7 @@ export abstract class AbstractFeatureGroup extends AbstractObjectGroup implement
   region?: Region;
   extendedData?: ExtendedData;
 
-  constructor(abstractFeatureType: AbstractFeatureType) {
+  protected constructor(abstractFeatureType: AbstractFeatureType) {
     super(abstractFeatureType);
 
     this.name = abstractFeatureType.name;

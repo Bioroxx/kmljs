@@ -7,7 +7,7 @@ export abstract class AbstractObjectGroup implements AbstractObjectType {
   id?: ID;
   targetId?: NCName;
 
-  constructor(abstractObjectTypeValues: AbstractObjectType) {
+  protected constructor(abstractObjectTypeValues: AbstractObjectType) {
     this.id = abstractObjectTypeValues.id;
     this.targetId = abstractObjectTypeValues.id;
   }
