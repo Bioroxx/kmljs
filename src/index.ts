@@ -160,5 +160,6 @@ export * from './dom/xsd/id';
 export * from './dom/xsd/ncname';
 
 // ./dom/atom
+export * from './dom/atom/atom-person-construct';
 export * from './dom/atom/atom-author';
 export * from './dom/atom/atom-link';

@@ -100,11 +100,14 @@ import {Change} from '../dom/kml/change';
 import {Create} from '../dom/kml/create';
 import {Delete} from '../dom/kml/delete';
 import {AbstractStyleSelectorType} from '../dom/kml/types/abstract-style-selector-type';
+import {AtomPersonConstruct} from '../dom/atom/atom-person-construct';
+import {AtomAuthor} from '../dom/atom/atom-author';
+import {AtomLink} from '../dom/atom/atom-link';
 
 export class KMLFactory {
 
   private sharedStyle: AbstractStyleSelectorType[] = [];
-  
+
   createKml(obj: KmlType): KmlType {
     return new Kml(obj);
   }
@@ -311,6 +314,14 @@ export class KMLFactory {
 
   createDelete(obj: DeleteType): DeleteType {
     return new Delete(obj);
+  }
+
+  createAtomAuthor(obj: AtomPersonConstruct): AtomPersonConstruct {
+    return new AtomAuthor(obj);
+  }
+
+  createAtomLink(obj: AtomLink): AtomLink {
+    return obj;
   }
 
   setSharedStyle(sharedStyle: AbstractStyleSelectorType[]): void {

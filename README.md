@@ -59,10 +59,9 @@ const kml = kmlParser.parse(kmlFileString);
 
 ## Roadmap
 
-- [ ] Parsing
+- [ ] Parsing and Testing
     - [x] `kml` namespace elements
-    - [ ] `atom` namespace elements
+    - [x] `atom` namespace elements
     - [ ] `xal` namespace elements
-- [ ] Parsing tests
 - [ ] Serialization
 - [ ] Serialization tests

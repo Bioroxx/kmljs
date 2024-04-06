@@ -6,6 +6,19 @@
     <name>Document.name</name>
     <visibility>true</visibility>
     <open>true</open>
+    <author>
+      <name>Document.author.name</name>
+      <uri>Document.author.uri</uri>
+      <email>Document.author.email</email>
+    </author>
+    <link
+      href="Document.link.href"
+      rel="Document.link.rel"
+      type="Document.link.type"
+      hreflang="Document.link.hreflang"
+      title="Document.link.title"
+      length="Document.link.length">
+    </link>
     <address>Document.address</address>
     <phoneNumber>+1-111-111-1111</phoneNumber>
     <snippet>Document.snippet</snippet>

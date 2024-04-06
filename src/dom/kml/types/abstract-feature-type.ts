@@ -1,4 +1,3 @@
-import {AtomAuthor} from '../../atom/atom-author';
 import {AtomLink} from '../../atom/atom-link';
 import {AnyURI} from '../../xsd/anyURI';
 import {AbstractObjectType} from './abstract-object-type';
@@ -7,6 +6,7 @@ import {AbstractTimePrimitiveType} from './abstract-time-primitive-type';
 import {AbstractStyleSelectorType} from './abstract-style-selector-type';
 import {RegionType} from './region-type';
 import {ExtendedDataType} from './extended-data-type';
+import {AtomPersonConstruct} from '../../atom/atom-person-construct';
 
 export interface AbstractFeatureType extends AbstractObjectType {
 
@@ -14,7 +14,7 @@ export interface AbstractFeatureType extends AbstractObjectType {
   name?: string;
   visibility?: boolean;
   open?: boolean;
-  atomAuthor?: AtomAuthor;
+  atomAuthor?: AtomPersonConstruct;
   atomLink?: AtomLink;
   address?: string;
   //TODO: xal:AddressDetails

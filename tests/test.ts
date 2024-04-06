@@ -6,6 +6,9 @@ import {
   AbstractStyleSelectorType,
   AbstractSubStyleType,
   AbstractViewType,
+  AtomAuthor,
+  AtomLink,
+  AtomPersonConstruct,
   BalloonStyleType,
   Camera,
   CameraType,
@@ -83,6 +86,16 @@ test('Parses KML file', () => {
   expect(document.snippet).toEqual(get(expected, 'kml.Document.snippet'));
   expect(document.description).toEqual(get(expected, 'kml.Document.description'));
   expect(document.styleUrl).toEqual(get(expected, 'kml.Document.styleUrl'));
+
+  // Document.AtomAuthor
+  expect(document.atomAuthor).toBeInstanceOf(AtomAuthor);
+  const atomAuthor = document.atomAuthor as AtomAuthor;
+  assertAtomPersonConstruct(atomAuthor, get(expected, 'kml.Document.author'));
+
+  // Document.AtomLink
+  expect(document.atomLink).toBeDefined();
+  const atomLink = document.atomLink as AtomLink;
+  assertAtomLink(atomLink, get(expected, 'kml.Document.link'))
 
   // Document.Camera
   expect(document.view).toBeInstanceOf(Camera);
@@ -560,4 +573,46 @@ export function assertPolygonType(actual: PolygonType, expected: any): void {
       assertLinearRingType(innerBoundaryIs, get(expected, `innerBoundaryIs.LinearRing[${index}]`))
     });
   }
+}
+
+export function assertAtomPersonConstruct(actual: AtomPersonConstruct, expected: any) {
+
+  const expectedName = get(expected, 'name');
+
+  if (actual.name.length === 1) {
+    expect(actual.name[0]).toEqual(expectedName);
+  } else if (actual.name.length > 1) {
+    actual.name.forEach((name, index) => {
+      expect(name).toEqual(get(expected, `name[${index}]`))
+    });
+  }
+
+  const expectedUri = get(expected, 'uri');
+
+  if (actual.uri.length === 1) {
+    expect(actual.uri[0]).toEqual(expectedUri);
+  } else if (actual.uri.length > 1) {
+    actual.uri.forEach((uri, index) => {
+      expect(uri).toEqual(get(expected, `uri[${index}]`))
+    });
+  }
+
+  const expectedEmail = get(expected, 'email');
+
+  if (actual.email.length === 1) {
+    expect(actual.email[0]).toEqual(expectedEmail);
+  } else if (actual.email.length > 1) {
+    actual.email.forEach((email, index) => {
+      expect(email).toEqual(get(expected, `email[${index}]`))
+    });
+  }
+}
+
+export function assertAtomLink(actual: AtomLink, expected: any) {
+  expect(actual.href).toEqual(get(expected, '@_href'));
+  expect(actual.rel).toEqual(get(expected, '@_rel'));
+  expect(actual.type).toEqual(get(expected, '@_type'));
+  expect(actual.hreflang).toEqual(get(expected, '@_hreflang'));
+  expect(actual.title).toEqual(get(expected, '@_title'));
+  expect(actual.length).toEqual(get(expected, '@_length'));
 }
