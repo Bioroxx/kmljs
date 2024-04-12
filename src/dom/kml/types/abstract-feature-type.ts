@@ -1,5 +1,5 @@
 import {AtomLink} from '../../atom/atom-link';
-import {AnyURI} from '../../xsd/anyURI';
+import {AnyURI} from '../../xs/anyURI';
 import {AbstractObjectType} from './abstract-object-type';
 import {AbstractViewType} from './abstract-view-type';
 import {AbstractTimePrimitiveType} from './abstract-time-primitive-type';

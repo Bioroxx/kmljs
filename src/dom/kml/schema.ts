@@ -1,6 +1,6 @@
 import {SimpleField} from './simple-field';
 import {SchemaType} from './types/schema-type';
-import {ID} from '../xsd/id';
+import {ID} from '../xs/id';
 
 export class Schema implements SchemaType {
 

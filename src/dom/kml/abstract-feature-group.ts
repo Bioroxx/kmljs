@@ -7,7 +7,7 @@ import {AbstractViewGroup} from './abstract-view-group';
 import {AbstractFeatureType} from './types/abstract-feature-type';
 import {AtomAuthor} from '../atom/atom-author';
 import {AtomLink} from '../atom/atom-link';
-import {AnyURI} from '../xsd/anyURI';
+import {AnyURI} from '../xs/anyURI';
 
 export abstract class AbstractFeatureGroup extends AbstractObjectGroup implements AbstractFeatureType {
 

@@ -1,5 +1,5 @@
 import {AbstractObjectType} from './abstract-object-type';
-import {AnyURI} from '../../xsd/anyURI';
+import {AnyURI} from '../../xs/anyURI';
 import {SimpleDataType} from './simple-data-type';
 
 export interface SchemaDataType extends AbstractObjectType {

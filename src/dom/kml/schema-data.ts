@@ -1,7 +1,7 @@
 import {AbstractObjectGroup} from './abstract-object-group';
 import {SimpleData} from './simple-data';
 import {SchemaDataType} from './types/schema-data-type';
-import {AnyURI} from '../xsd/anyURI';
+import {AnyURI} from '../xs/anyURI';
 
 export class SchemaData extends AbstractObjectGroup implements SchemaDataType {
 

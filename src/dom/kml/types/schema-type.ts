@@ -1,4 +1,4 @@
-import {ID} from '../../xsd/id';
+import {ID} from '../../xs/id';
 import {SimpleFieldType} from './simple-field-type';
 
 export interface SchemaType {

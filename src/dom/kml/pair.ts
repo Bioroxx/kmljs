@@ -2,7 +2,7 @@ import {AbstractObjectGroup} from './abstract-object-group';
 import {AbstractStyleSelectorGroup} from './abstract-style-selector-group';
 import {PairType} from './types/pair-type';
 import {StyleStateEnumType} from './types/style-state-enum-type';
-import {AnyURI} from '../xsd/anyURI';
+import {AnyURI} from '../xs/anyURI';
 
 export class Pair extends AbstractObjectGroup implements PairType {
 
