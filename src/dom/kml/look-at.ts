@@ -7,13 +7,13 @@ import {AltitudeModeGroup} from './altitude-mode-group';
 
 export class LookAt extends AbstractViewGroup implements LookAtType {
 
-  longitude?: Angle180Type;
-  latitude?: Angle90Type;
-  altitude?: number;
-  heading?: Angle360Type;
-  tilt?: Angle180Type;
-  range?: number;
-  altitudeMode?: AltitudeModeGroup;
+  longitude: Angle180Type;
+  latitude: Angle90Type;
+  altitude: number;
+  heading: Angle360Type;
+  tilt: Angle180Type;
+  range: number;
+  altitudeMode: AltitudeModeGroup;
 
   constructor(lookAtType: LookAtType) {
     super(lookAtType);

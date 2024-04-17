@@ -8,10 +8,10 @@ import {PointType} from './point-type';
 export interface PhotoOverlayType extends AbstractOverlayType {
 
   // Child elements
-  rotation?: Angle180Type;
+  rotation: Angle180Type;
   viewVolume?: ViewVolumeType;
   imagePyramid?: ImagePyramidType;
   point?: PointType;
-  shape?: ShapeEnumType;
+  shape: ShapeEnumType;
 
 }

@@ -11,20 +11,20 @@ import {AtomPersonConstruct} from '../../atom/atom-person-construct';
 export interface AbstractFeatureType extends AbstractObjectType {
 
   // Child elements
-  name?: string;
-  visibility?: boolean;
-  open?: boolean;
+  name: string;
+  visibility: boolean;
+  open: boolean;
   atomAuthor?: AtomPersonConstruct;
   atomLink?: AtomLink;
-  address?: string;
+  address: string;
   //TODO: xal:AddressDetails
-  phoneNumber?: string;
-  snippet?: string;
-  description?: string;
+  phoneNumber: string;
+  snippet: string;
+  description: string;
   view?: AbstractViewType;
   timePrimitive?: AbstractTimePrimitiveType;
   styleUrl?: AnyURI;
-  styleSelector?: AbstractStyleSelectorType[];
+  styleSelector: AbstractStyleSelectorType[];
   region?: RegionType;
   extendedData?: ExtendedDataType;
 

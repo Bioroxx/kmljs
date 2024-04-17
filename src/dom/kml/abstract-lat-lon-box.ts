@@ -4,10 +4,10 @@ import {Angle180Type} from './types/angle-180-type';
 
 export abstract class AbstractLatLonBox extends AbstractObjectGroup implements AbstractLatLonBoxType {
 
-  north?: Angle180Type;
-  south?: Angle180Type;
-  east?: Angle180Type;
-  west?: Angle180Type;
+  north: Angle180Type;
+  south: Angle180Type;
+  east: Angle180Type;
+  west: Angle180Type;
 
   protected constructor(abstractLatLonBoxType: AbstractLatLonBoxType) {
     super(abstractLatLonBoxType);

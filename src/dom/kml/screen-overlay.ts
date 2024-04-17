@@ -5,11 +5,11 @@ import {Angle180Type} from './types/angle-180-type';
 
 export class ScreenOverlay extends AbstractOverlayGroup implements ScreenOverlayType {
 
-  overlayXY?: Vec2Type;
-  screenXY?: Vec2Type;
-  rotationXY?: Vec2Type;
-  size?: Vec2Type;
-  rotation?: Angle180Type;
+  overlayXY: Vec2Type;
+  screenXY: Vec2Type;
+  rotationXY: Vec2Type;
+  size: Vec2Type;
+  rotation: Angle180Type;
 
   constructor(screenOverlayType: ScreenOverlayType) {
     super(screenOverlayType);

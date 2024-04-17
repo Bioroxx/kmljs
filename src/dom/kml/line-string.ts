@@ -5,10 +5,10 @@ import {CoordinatesType} from './types/coordinates-type';
 
 export class LineString extends AbstractGeometryGroup implements LineStringType {
 
-  extrude?: boolean;
-  tessellate?: boolean;
-  altitudeMode?: AltitudeModeGroup;
-  coordinates?: CoordinatesType;
+  extrude: boolean;
+  tessellate: boolean;
+  altitudeMode: AltitudeModeGroup;
+  coordinates: CoordinatesType;
 
   constructor(lineStringType: LineStringType) {
     super(lineStringType);

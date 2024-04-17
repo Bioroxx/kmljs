@@ -6,10 +6,10 @@ import {Vec2Type} from './types/vec2-type';
 
 export class IconStyle extends AbstractColorStyleGroup implements IconStyleType {
 
-  scale?: number;
-  heading?: Angle360Type;
-  icon?: BasicLinkType;
-  hotSpot?: Vec2Type;
+  scale: number;
+  heading: Angle360Type;
+  icon: BasicLinkType;
+  hotSpot: Vec2Type;
 
   constructor(iconStyleType: IconStyleType) {
     super(iconStyleType);

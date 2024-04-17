@@ -4,7 +4,7 @@ import {AbstractFeatureType} from './abstract-feature-type';
 export interface KmlType {
 
   // Attributes
-  hint?: string;
+  hint: string;
 
   // Child elements
   networkLinkControl?: NetworkLinkControlType

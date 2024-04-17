@@ -5,7 +5,7 @@ export interface Vec2Type {
   // Attributes
   x: number;
   y: number;
-  xunits?: UnitsEnumType;
-  yunits?: UnitsEnumType;
+  xunits: UnitsEnumType;
+  yunits: UnitsEnumType;
 
 }

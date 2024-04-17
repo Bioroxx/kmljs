@@ -1,3 +1,1 @@
-export interface DateTimeType extends Date {
-
-}
+export type DateTimeType = Date;

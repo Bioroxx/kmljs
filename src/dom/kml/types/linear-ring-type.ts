@@ -5,9 +5,9 @@ import {CoordinatesType} from './coordinates-type';
 export interface LinearRingType extends AbstractGeometryType {
 
   // Child elements
-  extrude?: boolean;
-  tessellate?: boolean;
-  altitudeMode?: AltitudeModeGroup;
-  coordinates?: CoordinatesType;
+  extrude: boolean;
+  tessellate: boolean;
+  altitudeMode: AltitudeModeGroup;
+  coordinates: CoordinatesType;
 
 }

@@ -1,20 +1,20 @@
 import {AbstractGeometryGroup} from './abstract-geometry-group';
-import {ResourceMap} from './resource-map';
-import {Link} from './link';
-import {Scale} from './scale';
-import {Orientation} from './orientation';
 import {AltitudeModeGroup} from './altitude-mode-group';
-import {Location} from './location';
 import {ModelType} from './types/model-type';
+import {LocationType} from './types/location-type';
+import {OrientationType} from './types/orientation-type';
+import {ScaleType} from './types/scale-type';
+import {LinkType} from './types/link-type';
+import {ResourceMapType} from './types/resource-map-type';
 
 export class Model extends AbstractGeometryGroup implements ModelType {
 
-  altitudeMode?: AltitudeModeGroup;
-  location?: Location;
-  orientation?: Orientation;
-  scale?: Scale;
-  link?: Link;
-  resourceMap?: ResourceMap;
+  altitudeMode: AltitudeModeGroup;
+  location?: LocationType;
+  orientation?: OrientationType;
+  scale?: ScaleType;
+  link?: LinkType;
+  resourceMap?: ResourceMapType;
 
   constructor(modelType: ModelType) {
     super(modelType);

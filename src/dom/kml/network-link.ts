@@ -1,12 +1,12 @@
 import {AbstractFeatureGroup} from './abstract-feature-group';
-import {Link} from './link';
 import {NetworkLinkType} from './types/network-link-type';
+import {LinkType} from './types/link-type';
 
 export class NetworkLink extends AbstractFeatureGroup implements NetworkLinkType {
 
-  refreshVisibility?: boolean;
-  flyToView?: boolean;
-  link?: Link;
+  refreshVisibility: boolean;
+  flyToView: boolean;
+  link?: LinkType;
 
   constructor(networkLinkType: NetworkLinkType) {
     super(networkLinkType);

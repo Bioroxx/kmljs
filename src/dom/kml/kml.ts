@@ -1,13 +1,13 @@
-import {NetworkLinkControl} from './network-link-control';
-import {AbstractFeatureGroup} from './abstract-feature-group';
 import {KmlType} from './types/kml-type';
+import {NetworkLinkControlType} from './types/network-link-control.type';
+import {AbstractFeatureType} from './types/abstract-feature-type';
 
 
 export class Kml implements KmlType {
 
-  hint?: string;
-  networkLinkControl?: NetworkLinkControl;
-  feature?: AbstractFeatureGroup;
+  hint: string;
+  networkLinkControl?: NetworkLinkControlType;
+  feature?: AbstractFeatureType;
 
   constructor(kml: KmlType) {
     this.hint = kml.hint;

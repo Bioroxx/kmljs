@@ -5,11 +5,11 @@ import {AbstractObjectGroup} from './abstract-object-group';
 
 export class ViewVolume extends AbstractObjectGroup implements ViewVolumeType {
 
-  leftFov?: Angle180Type;
-  rightFov?: Angle180Type;
-  bottomFov?: Angle90Type;
-  topFov?: Angle90Type;
-  near?: number;
+  leftFov: Angle180Type;
+  rightFov: Angle180Type;
+  bottomFov: Angle90Type;
+  topFov: Angle90Type;
+  near: number;
 
   constructor(viewVolumeType: ViewVolumeType) {
     super(viewVolumeType);

@@ -4,9 +4,9 @@ import {GridOriginEnumType} from './grid-origin-enum-type';
 export interface ImagePyramidType extends AbstractObjectType {
 
   // Child elements
-  tileSize?: number;
-  maxWidth?: number;
-  maxHeight?: number;
-  gridOrigin?: GridOriginEnumType;
+  tileSize: number;
+  maxWidth: number;
+  maxHeight: number;
+  gridOrigin: GridOriginEnumType;
 
 }

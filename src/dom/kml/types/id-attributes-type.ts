@@ -4,7 +4,7 @@ import {NCName} from '../../xs/ncname';
 export interface IdAttributes {
 
   // Attributes
-  id?: ID;
-  targetId?: NCName;
+  id: ID;
+  targetId: NCName;
 
 }

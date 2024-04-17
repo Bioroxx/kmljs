@@ -3,9 +3,9 @@ import {DataType} from './types/data-type';
 
 export class Data extends AbstractObjectGroup implements DataType {
 
-  name?: string;
-  displayName?: string;
-  value?: string;
+  name: string;
+  displayName: string;
+  value: string;
 
   constructor(dataType: DataType) {
     super(dataType);

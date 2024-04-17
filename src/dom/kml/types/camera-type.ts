@@ -7,12 +7,12 @@ import {AltitudeModeGroup} from '../altitude-mode-group';
 export interface CameraType extends AbstractViewType {
 
   // Child elements
-  longitude?: Angle180Type;
-  latitude?: Angle90Type;
-  altitude?: number;
-  heading?: Angle360Type;
-  tilt?: Angle180Type;
-  roll?: Angle180Type;
-  altitudeMode?: AltitudeModeGroup;
+  longitude: Angle180Type;
+  latitude: Angle90Type;
+  altitude: number;
+  heading: Angle360Type;
+  tilt: Angle180Type;
+  roll: Angle180Type;
+  altitudeMode: AltitudeModeGroup;
 
 }

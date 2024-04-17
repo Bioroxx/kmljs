@@ -5,9 +5,9 @@ import {DisplayModeEnumType} from './display-mode-enum-type';
 export interface BalloonStyleType extends AbstractSubStyleType {
 
   // Child elements
-  bgColor?: ColorType;
-  textColor?: ColorType;
-  text?: string;
-  displayMode?: DisplayModeEnumType;
+  bgColor: ColorType;
+  textColor: ColorType;
+  text: string;
+  displayMode: DisplayModeEnumType;
 
 }

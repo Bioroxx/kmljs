@@ -6,7 +6,7 @@ import {AnyURI} from '../xs/anyURI';
 
 export class Pair extends AbstractObjectGroup implements PairType {
 
-  key?: StyleStateEnumType;
+  key: StyleStateEnumType;
   styleUrl?: AnyURI;
   styleSelector?: AbstractStyleSelectorGroup;
 

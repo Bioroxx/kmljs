@@ -5,9 +5,9 @@ import {CoordinatesType} from './types/coordinates-type';
 
 export class Point extends AbstractGeometryGroup implements PointType {
 
-  extrude?: boolean;
-  altitudeMode?: AltitudeModeGroup;
-  coordinates?: CoordinatesType;
+  extrude: boolean;
+  altitudeMode: AltitudeModeGroup;
+  coordinates: CoordinatesType;
 
   constructor(pointType: PointType) {
     super(pointType);
