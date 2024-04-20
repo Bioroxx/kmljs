@@ -255,92 +255,57 @@ export class KMLParser {
   }
 
   private readAbstractStyleSelectorType(node: any, parser: KMLParser): AbstractStyleSelectorType {
-    return {
-      ...parser.readAbstractType(node, parser.readAbstractObjectType)
-    };
+    return parser.readAbstractType(node, parser.readAbstractObjectType);
   }
 
   private readAbstractSubStyleType(node: any, parser: KMLParser): AbstractSubStyleType {
-    return {
-      ...parser.readAbstractType(node, parser.readAbstractObjectType)
-    };
+    return parser.readAbstractType(node, parser.readAbstractObjectType);
   }
 
   private readAbstractColorStyleType(node: any, parser: KMLParser): AbstractColorStyleType {
-
-    const abstractSubStyleTypeValues = parser.readAbstractType(node, parser.readAbstractSubStyleType);
-
-    const color = parser.readChildElement(KmlTagName.color, node, parser.readColorType);
-    const colorMode = parser.readChildElement(KmlTagName.colorMode, node, parser.readColorModeEnumType);
-
     return {
-      ...abstractSubStyleTypeValues,
-      color,
-      colorMode
+      ...parser.readAbstractType(node, parser.readAbstractSubStyleType),
+      color: parser.readChildElement(KmlTagName.color, node, parser.readColorType) ?? 'ffffffff',
+      colorMode: parser.readChildElement(KmlTagName.colorMode, node, parser.readColorModeEnumType) ?? ColorModeEnumType.normal
     }
   }
 
   private readAbstractViewType(node: any, parser: KMLParser): AbstractViewType {
-    return {
-      ...parser.readAbstractType(node, parser.readAbstractObjectType)
-    }
+    return parser.readAbstractType(node, parser.readAbstractObjectType);
   }
 
   private readAbstractLatLonBoxType(node: any, parser: KMLParser): AbstractLatLonBoxType {
-
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const north = parser.readChildElement(KmlTagName.north, node, parser.readAngle180Type);
-    const south = parser.readChildElement(KmlTagName.south, node, parser.readAngle180Type);
-    const east = parser.readChildElement(KmlTagName.east, node, parser.readAngle180Type);
-    const west = parser.readChildElement(KmlTagName.west, node, parser.readAngle180Type);
-
     return {
-      ...abstractObjectTypeValues,
-      north,
-      south,
-      east,
-      west
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      north: parser.readChildElement(KmlTagName.north, node, parser.readAngle180Type) ?? 180.0,
+      south: parser.readChildElement(KmlTagName.south, node, parser.readAngle180Type) ?? -180.0,
+      east: parser.readChildElement(KmlTagName.east, node, parser.readAngle180Type) ?? 180.0,
+      west: parser.readChildElement(KmlTagName.west, node, parser.readAngle180Type) ?? -180.0
     }
   }
 
   private readBasicLinkType(node: any, parser: KMLParser): BasicLinkType {
-
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const href = parser.readChildElement(KmlTagName.href, node, parser.readXsString);
-
     return {
-      ...abstractObjectTypeValues,
-      href
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      href: parser.readChildElement(KmlTagName.href, node, parser.readXsString)
     }
   }
 
   private readLinkType(node: any, parser: KMLParser): LinkType {
-
-    const basicLinkTypeValues = parser.readAbstractType(node, parser.readBasicLinkType);
-    const refreshMode = parser.readChildElement(KmlTagName.refreshMode, node, parser.readRefreshModeEnumType);
-    const refreshInterval = parser.readChildElement(KmlTagName.refreshInterval, node, parser.readXsDouble);
-    const viewRefreshMode = parser.readChildElement(KmlTagName.viewRefreshMode, node, parser.readViewRefreshModeEnumType);
-    const viewRefreshTime = parser.readChildElement(KmlTagName.viewRefreshTime, node, parser.readXsDouble);
-    const viewBoundScale = parser.readChildElement(KmlTagName.viewBoundScale, node, parser.readXsDouble);
-    const viewFormat = parser.readChildElement(KmlTagName.viewFormat, node, parser.readXsString);
-    const httpQuery = parser.readChildElement(KmlTagName.httpQuery, node, parser.readXsString);
-
     return {
-      ...basicLinkTypeValues,
-      refreshMode,
-      refreshInterval,
-      viewRefreshMode,
-      viewRefreshTime,
-      viewBoundScale,
-      viewFormat,
-      httpQuery
+      ...parser.readAbstractType(node, parser.readBasicLinkType),
+      refreshMode: parser.readChildElement(KmlTagName.refreshMode, node, parser.readRefreshModeEnumType) ?? RefreshModeEnumType.onChange,
+      refreshInterval: parser.readChildElement(KmlTagName.refreshInterval, node, parser.readXsDouble) ?? 4.0,
+      viewRefreshMode: parser.readChildElement(KmlTagName.viewRefreshMode, node, parser.readViewRefreshModeEnumType) ?? ViewRefreshModeEnumType.never,
+      viewRefreshTime: parser.readChildElement(KmlTagName.viewRefreshTime, node, parser.readXsDouble) ?? 4.0,
+      viewBoundScale: parser.readChildElement(KmlTagName.viewBoundScale, node, parser.readXsDouble) ?? 1.0,
+      viewFormat: parser.readChildElement(KmlTagName.viewFormat, node, parser.readXsString) ?? '',
+      httpQuery: parser.readChildElement(KmlTagName.httpQuery, node, parser.readXsString) ?? ''
     }
   }
 
   private readAbstractTimePrimitiveType(node: any, parser: KMLParser): AbstractTimePrimitiveType {
-    return {
-      ...parser.readAbstractType(node, parser.readAbstractObjectType)
-    };
+    return parser.readAbstractType(node, parser.readAbstractObjectType);
   }
 
   private readAbstractObjectGroupArray(node: any, parser: KMLParser): AbstractObjectType[] {
@@ -620,14 +585,10 @@ export class KMLParser {
 
   private readKml(node: any, parser: KMLParser): KmlType {
 
-    const hint = parser.readAttribute(KmlAttributeName.hint, node, parser.readXsString);
-    const networkLinkControl = parser.readChildElement(KmlTagName.NetworkLinkControl, node, parser.readNetworkLinkControl);
-    const feature = parser.readAbstractType(node, parser.readAbstractFeatureGroup);
-
     const kml: KmlType = {
-      hint,
-      networkLinkControl,
-      feature
+      hint: parser.readAttribute(KmlAttributeName.hint, node, parser.readXsString) ?? '',
+      networkLinkControl: parser.readChildElement(KmlTagName.NetworkLinkControl, node, parser.readNetworkLinkControl),
+      feature: parser.readAbstractType(node, parser.readAbstractFeatureGroup)
     }
 
     return parser.kmlFactory.createKml(kml);
@@ -635,12 +596,9 @@ export class KMLParser {
 
   private readPlacemark(node: any, parser: KMLParser): PlacemarkType {
 
-    const abstractFeatureTypeValues = parser.readAbstractType(node, parser.readAbstractFeatureType);
-    const geometry = parser.readAbstractType(node, parser.readAbstractGeometryGroup);
-
     const placemarkType: PlacemarkType = {
-      ...abstractFeatureTypeValues,
-      geometry
+      ...parser.readAbstractType(node, parser.readAbstractFeatureType),
+      geometry: parser.readAbstractType(node, parser.readAbstractGeometryGroup)
     };
 
     return parser.kmlFactory.createPlacemark(placemarkType);
@@ -648,12 +606,9 @@ export class KMLParser {
 
   private readFolder(node: any, parser: KMLParser): FolderType {
 
-    const abstractContainerTypeValues = parser.readAbstractType(node, parser.readAbstractContainerType);
-    const feature = parser.readAbstractTypeArray(node, parser.readAbstractFeatureGroupArray);
-
     const folderType: FolderType = {
-      ...abstractContainerTypeValues,
-      feature
+      ...parser.readAbstractType(node, parser.readAbstractContainerType),
+      feature: parser.readAbstractTypeArray(node, parser.readAbstractFeatureGroupArray)
     }
 
     return parser.kmlFactory.createFolder(folderType);
@@ -661,17 +616,14 @@ export class KMLParser {
 
   private readDocument(node: any, parser: KMLParser): DocumentType {
 
-    const abstractContainerTypeValues = parser.readAbstractType(node, parser.readAbstractContainerType);
+    const abstractContainerType = parser.readAbstractType(node, parser.readAbstractContainerType);
 
-    parser.kmlFactory.setSharedStyle(abstractContainerTypeValues?.styleSelector ?? []);
-
-    const schema = parser.readChildElementArray(KmlTagName.Schema, node, parser.readSchema);
-    const feature = parser.readAbstractTypeArray(node, parser.readAbstractFeatureGroupArray);
+    parser.kmlFactory.setSharedStyle(abstractContainerType?.styleSelector ?? []);
 
     const documentType: DocumentType = {
-      ...abstractContainerTypeValues,
-      schema,
-      feature
+      ...abstractContainerType,
+      schema: parser.readChildElementArray(KmlTagName.Schema, node, parser.readSchema),
+      feature: parser.readAbstractTypeArray(node, parser.readAbstractFeatureGroupArray)
     }
 
     parser.kmlFactory.resetSharedStyle();
@@ -680,14 +632,10 @@ export class KMLParser {
 
   private readSchema(node: any, parser: KMLParser): SchemaType {
 
-    const id = parser.readAttribute(KmlAttributeName.id, node, parser.readXsID);
-    const name = parser.readAttribute(KmlAttributeName.name, node, parser.readXsString);
-    const simpleField = parser.readChildElementArray(KmlTagName.SimpleField, node, parser.readSimpleField);
-
     const schemaType: SchemaType = {
-      id,
-      name,
-      simpleField
+      id: parser.readAttribute(KmlAttributeName.id, node, parser.readXsID) ?? '',
+      name: parser.readAttribute(KmlAttributeName.name, node, parser.readXsString) ?? '',
+      simpleField: parser.readChildElementArray(KmlTagName.SimpleField, node, parser.readSimpleField)
     }
 
     return parser.kmlFactory.createSchema(schemaType);
@@ -695,14 +643,10 @@ export class KMLParser {
 
   private readSimpleField(node: any, parser: KMLParser): SimpleFieldType {
 
-    const type = parser.readAttribute(KmlAttributeName.type, node, parser.readXsString);
-    const name = parser.readAttribute(KmlAttributeName.name, node, parser.readXsString);
-    const displayName = parser.readChildElement(KmlTagName.displayName, node, parser.readXsString);
-
     const simpleFieldType: SimpleFieldType = {
-      type,
-      name,
-      displayName
+      type: parser.readAttribute(KmlAttributeName.type, node, parser.readXsString) ?? '',
+      name: parser.readAttribute(KmlAttributeName.name, node, parser.readXsString) ?? '',
+      displayName: parser.readChildElement(KmlTagName.displayName, node, parser.readXsString) ?? ''
     }
 
     return parser.kmlFactory.createSimpleField(simpleFieldType);
@@ -710,18 +654,12 @@ export class KMLParser {
 
   private readLineString(node: any, parser: KMLParser): LineStringType {
 
-    const abstractGeometryTypeValues = parser.readAbstractType(node, parser.readAbstractGeometryType);
-    const extrude = parser.readChildElement(KmlTagName.extrude, node, parser.readXsBoolean);
-    const tessellate = parser.readChildElement(KmlTagName.tessellate, node, parser.readXsBoolean);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-    const coordinates = parser.readChildElement(KmlTagName.coordinates, node, parser.readCoordinates);
-
     const lineStringType: LineStringType = {
-      ...abstractGeometryTypeValues,
-      extrude,
-      tessellate,
-      altitudeMode,
-      coordinates
+      ...parser.readAbstractType(node, parser.readAbstractGeometryType),
+      extrude: parser.readChildElement(KmlTagName.extrude, node, parser.readXsBoolean) ?? false,
+      tessellate: parser.readChildElement(KmlTagName.tessellate, node, parser.readXsBoolean) ?? false,
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround,
+      coordinates: parser.readChildElement(KmlTagName.coordinates, node, parser.readCoordinates) ?? []
     }
 
     return parser.kmlFactory.createLineString(lineStringType);
@@ -729,22 +667,13 @@ export class KMLParser {
 
   private readPolygon(node: any, parser: KMLParser): PolygonType {
 
-    const abstractGeometryTypeValues = parser.readAbstractType(node, parser.readAbstractGeometryType);
-    const extrude = parser.readChildElement(KmlTagName.extrude, node, parser.readXsBoolean);
-    const tessellate = parser.readChildElement(KmlTagName.tessellate, node, parser.readXsBoolean);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-    const outerBoundaryIs = parser.readChildElement(KmlTagName.outerBoundaryIs, node, parser.readBoundaryType);
-    const innerBoundaryIs = parser.readChildElement(KmlTagName.innerBoundaryIs, node, parser.readBoundaryTypeArray);
-
-    // throw if outer boundary is undefined
-
     const polygonType: PolygonType = {
-      ...abstractGeometryTypeValues,
-      extrude,
-      tessellate,
-      altitudeMode,
-      outerBoundaryIs,
-      innerBoundaryIs
+      ...parser.readAbstractType(node, parser.readAbstractGeometryType),
+      extrude: parser.readChildElement(KmlTagName.extrude, node, parser.readXsBoolean) ?? false,
+      tessellate: parser.readChildElement(KmlTagName.tessellate, node, parser.readXsBoolean) ?? false,
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround,
+      outerBoundaryIs: parser.readChildElement(KmlTagName.outerBoundaryIs, node, parser.readBoundaryType),
+      innerBoundaryIs: parser.readChildElement(KmlTagName.innerBoundaryIs, node, parser.readBoundaryTypeArray) ?? []
     }
 
     return parser.kmlFactory.createPolygon(polygonType);
@@ -752,16 +681,11 @@ export class KMLParser {
 
   private readPoint(node: any, parser: KMLParser): PointType {
 
-    const abstractGeometryTypeValues = parser.readAbstractType(node, parser.readAbstractGeometryType);
-    const extrude = parser.readChildElement(KmlTagName.extrude, node, parser.readXsBoolean);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-    const coordinates = parser.readChildElement(KmlTagName.coordinates, node, parser.readCoordinates);
-
     const pointType: PointType = {
-      ...abstractGeometryTypeValues,
-      extrude,
-      altitudeMode,
-      coordinates
+      ...parser.readAbstractType(node, parser.readAbstractGeometryType),
+      extrude: parser.readChildElement(KmlTagName.extrude, node, parser.readXsBoolean) ?? false,
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround,
+      coordinates: parser.readChildElement(KmlTagName.coordinates, node, parser.readCoordinates) ?? []
     }
 
     return parser.kmlFactory.createPoint(pointType);
@@ -769,19 +693,12 @@ export class KMLParser {
 
   private readLinearRing(node: any, parser: KMLParser): LinearRingType {
 
-    const abstractGeometryTypeValues = parser.readAbstractType(node, parser.readAbstractGeometryType);
-
-    const extrude = parser.readChildElement(KmlTagName.extrude, node, parser.readXsBoolean);
-    const tessellate = parser.readChildElement(KmlTagName.tessellate, node, parser.readXsBoolean);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-    const coordinates = parser.readChildElement(KmlTagName.coordinates, node, parser.readCoordinates);
-
     const linearRingType: LinearRingType = {
-      ...abstractGeometryTypeValues,
-      extrude,
-      tessellate,
-      altitudeMode,
-      coordinates
+      ...parser.readAbstractType(node, parser.readAbstractGeometryType),
+      extrude: parser.readChildElement(KmlTagName.extrude, node, parser.readXsBoolean) ?? false,
+      tessellate: parser.readChildElement(KmlTagName.tessellate, node, parser.readXsBoolean) ?? false,
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround,
+      coordinates: parser.readChildElement(KmlTagName.coordinates, node, parser.readCoordinates) ?? []
     }
 
     return parser.kmlFactory.createLinearRing(linearRingType);
@@ -789,22 +706,14 @@ export class KMLParser {
 
   private readModel(node: any, parser: KMLParser): ModelType {
 
-    const abstractGeometryTypeValues = parser.readAbstractType(node, parser.readAbstractGeometryType);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-    const location = parser.readChildElement(KmlTagName.Location, node, parser.readLocation);
-    const orientation = parser.readChildElement(KmlTagName.Orientation, node, parser.readOrientation);
-    const scale = parser.readChildElement(KmlTagName.Scale, node, parser.readScale);
-    const link = parser.readChildElement(KmlTagName.Link, node, parser.readLink);
-    const resourceMap = parser.readChildElement(KmlTagName.ResourceMap, node, parser.readResourceMap);
-
     const modelType: ModelType = {
-      ...abstractGeometryTypeValues,
-      altitudeMode,
-      location,
-      orientation,
-      scale,
-      link,
-      resourceMap
+      ...parser.readAbstractType(node, parser.readAbstractGeometryType),
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround,
+      location: parser.readChildElement(KmlTagName.Location, node, parser.readLocation),
+      orientation: parser.readChildElement(KmlTagName.Orientation, node, parser.readOrientation),
+      scale: parser.readChildElement(KmlTagName.Scale, node, parser.readScale),
+      link: parser.readChildElement(KmlTagName.Link, node, parser.readLink),
+      resourceMap: parser.readChildElement(KmlTagName.ResourceMap, node, parser.readResourceMap)
     }
 
     return parser.kmlFactory.createModel(modelType);
@@ -812,17 +721,11 @@ export class KMLParser {
 
   private readLocation(node: any, parser: KMLParser): LocationType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-
-    const longitude = parser.readChildElement(KmlTagName.longitude, node, parser.readAngle180Type);
-    const latitude = parser.readChildElement(KmlTagName.latitude, node, parser.readAngle90Type);
-    const altitude = parser.readChildElement(KmlTagName.altitude, node, parser.readXsDouble);
-
     const locationType: LocationType = {
-      ...abstractObjectTypeValues,
-      longitude,
-      latitude,
-      altitude
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      longitude: parser.readChildElement(KmlTagName.longitude, node, parser.readAngle180Type) ?? 0.0,
+      latitude: parser.readChildElement(KmlTagName.latitude, node, parser.readAngle90Type) ?? 0.0,
+      altitude: parser.readChildElement(KmlTagName.altitude, node, parser.readXsDouble) ?? 0.0
     }
 
     return parser.kmlFactory.createLocation(locationType);
@@ -830,16 +733,11 @@ export class KMLParser {
 
   private readOrientation(node: any, parser: KMLParser): OrientationType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const heading = parser.readChildElement(KmlTagName.heading, node, parser.readAngle360Type);
-    const tilt = parser.readChildElement(KmlTagName.tilt, node, parser.readAngle180Type);
-    const roll = parser.readChildElement(KmlTagName.roll, node, parser.readAngle360Type);
-
     const orientationType: OrientationType = {
-      ...abstractObjectTypeValues,
-      heading,
-      tilt,
-      roll
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      heading: parser.readChildElement(KmlTagName.heading, node, parser.readAngle360Type) ?? 0.0,
+      tilt: parser.readChildElement(KmlTagName.tilt, node, parser.readAngle180Type) ?? 0.0,
+      roll: parser.readChildElement(KmlTagName.roll, node, parser.readAngle360Type) ?? 0.0
     }
 
     return parser.kmlFactory.createOrientation(orientationType);
@@ -847,16 +745,11 @@ export class KMLParser {
 
   private readScale(node: any, parser: KMLParser): ScaleType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const x = parser.readChildElement(KmlTagName.x, node, parser.readXsDouble);
-    const y = parser.readChildElement(KmlTagName.y, node, parser.readXsDouble);
-    const z = parser.readChildElement(KmlTagName.z, node, parser.readXsDouble);
-
     const scaleType: ScaleType = {
-      ...abstractObjectTypeValues,
-      x,
-      y,
-      z
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      x: parser.readChildElement(KmlTagName.x, node, parser.readXsDouble) ?? 1.0,
+      y: parser.readChildElement(KmlTagName.y, node, parser.readXsDouble) ?? 1.0,
+      z: parser.readChildElement(KmlTagName.z, node, parser.readXsDouble) ?? 1.0
     }
 
     return parser.kmlFactory.createScale(scaleType);
@@ -864,12 +757,9 @@ export class KMLParser {
 
   private readResourceMap(node: any, parser: KMLParser): ResourceMapType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const alias = parser.readChildElementArray(KmlTagName.Alias, node, parser.readAlias);
-
     const resourceMapType: ResourceMapType = {
-      ...abstractObjectTypeValues,
-      alias
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      alias: parser.readChildElementArray(KmlTagName.Alias, node, parser.readAlias)
     }
 
     return parser.kmlFactory.createResourceMap(resourceMapType);
@@ -877,15 +767,10 @@ export class KMLParser {
 
   private readAlias(node: any, parser: KMLParser): AliasType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-
-    const targetHref = parser.readChildElement(KmlTagName.targetHref, node, parser.readXsString);
-    const sourceHref = parser.readChildElement(KmlTagName.sourceHref, node, parser.readXsString);
-
     const aliasType: AliasType = {
-      ...abstractObjectTypeValues,
-      targetHref,
-      sourceHref
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      targetHref: parser.readChildElement(KmlTagName.targetHref, node, parser.readXsString),
+      sourceHref: parser.readChildElement(KmlTagName.sourceHref, node, parser.readXsString)
     }
 
     return parser.kmlFactory.createAlias(aliasType);
@@ -893,12 +778,9 @@ export class KMLParser {
 
   private readMultiGeometry(node: any, parser: KMLParser): MultiGeometryType {
 
-    const abstractGeometryTypeValues = parser.readAbstractType(node, parser.readAbstractGeometryType);
-    const geometry = parser.readAbstractTypeArray(node, parser.readAbstractGeometryGroupArray);
-
     const multiGeometryType: MultiGeometryType = {
-      ...abstractGeometryTypeValues,
-      geometry
+      ...parser.readAbstractType(node, parser.readAbstractGeometryType),
+      geometry: parser.readAbstractTypeArray(node, parser.readAbstractGeometryGroupArray)
     }
 
     return parser.kmlFactory.createMultiGeometry(multiGeometryType);
@@ -906,16 +788,11 @@ export class KMLParser {
 
   private readNetworkLink(node: any, parser: KMLParser): NetworkLinkType {
 
-    const abstractFeatureGroupTypeValues = parser.readAbstractType(node, parser.readAbstractFeatureType);
-    const refreshVisibility = parser.readChildElement(KmlTagName.refreshVisibility, node, parser.readXsBoolean);
-    const flyToView = parser.readChildElement(KmlTagName.flyToView, node, parser.readXsBoolean);
-    const link = parser.readChildElement(KmlTagName.Link, node, parser.readLink);
-
     const networkLinkType: NetworkLinkType = {
-      ...abstractFeatureGroupTypeValues,
-      refreshVisibility,
-      flyToView,
-      link
+      ...parser.readAbstractType(node, parser.readAbstractFeatureType),
+      refreshVisibility: parser.readChildElement(KmlTagName.refreshVisibility, node, parser.readXsBoolean) ?? false,
+      flyToView: parser.readChildElement(KmlTagName.flyToView, node, parser.readXsBoolean) ?? false,
+      link: parser.readChildElement(KmlTagName.Link, node, parser.readLink)
     }
 
     return parser.kmlFactory.createNetworkLink(networkLinkType);
@@ -923,16 +800,11 @@ export class KMLParser {
 
   private readGroundOverlay(node: any, parser: KMLParser): GroundOverlayType {
 
-    const abstractOverlayTypeValues = parser.readAbstractType(node, parser.readAbstractOverlayType);
-    const altitude = parser.readChildElement(KmlTagName.altitude, node, parser.readXsDouble);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-    const latLonBox = parser.readChildElement(KmlTagName.latLonBox, node, parser.readLatLonBox);
-
     const groundOverlayType: GroundOverlayType = {
-      ...abstractOverlayTypeValues,
-      altitude,
-      altitudeMode,
-      latLonBox
+      ...parser.readAbstractType(node, parser.readAbstractOverlayType),
+      altitude: parser.readChildElement(KmlTagName.altitude, node, parser.readXsDouble) ?? 0.0,
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround,
+      latLonBox: parser.readChildElement(KmlTagName.latLonBox, node, parser.readLatLonBox)
     }
 
     return parser.kmlFactory.createGroundOverlay(groundOverlayType);
@@ -940,20 +812,13 @@ export class KMLParser {
 
   private readPhotoOverlay(node: any, parser: KMLParser): PhotoOverlayType {
 
-    const abstractOverlayTypeValues = parser.readAbstractType(node, parser.readAbstractOverlayType);
-    const rotation = parser.readChildElement(KmlTagName.rotation, node, parser.readAngle180Type);
-    const viewVolume = parser.readChildElement(KmlTagName.viewVolume, node, parser.readViewVolume);
-    const imagePyramid = parser.readChildElement(KmlTagName.imagePyramid, node, parser.readImagePyramid);
-    const point = parser.readChildElement(KmlTagName.Point, node, parser.readPoint);
-    const shape = parser.readChildElement(KmlTagName.shape, node, parser.readShapeEnumType);
-
     const photoOverlayType: PhotoOverlayType = {
-      ...abstractOverlayTypeValues,
-      rotation,
-      viewVolume,
-      imagePyramid,
-      point,
-      shape
+      ...parser.readAbstractType(node, parser.readAbstractOverlayType),
+      rotation: parser.readChildElement(KmlTagName.rotation, node, parser.readAngle180Type) ?? 0.0,
+      viewVolume: parser.readChildElement(KmlTagName.viewVolume, node, parser.readViewVolume),
+      imagePyramid: parser.readChildElement(KmlTagName.imagePyramid, node, parser.readImagePyramid),
+      point: parser.readChildElement(KmlTagName.Point, node, parser.readPoint),
+      shape: parser.readChildElement(KmlTagName.shape, node, parser.readShapeEnumType) ?? ShapeEnumType.rectangle
     }
 
     return parser.kmlFactory.createPhotoOverlay(photoOverlayType);
@@ -961,20 +826,17 @@ export class KMLParser {
 
   private readScreenOverlay(node: any, parser: KMLParser): ScreenOverlayType {
 
-    const abstractOverlayTypeValues = parser.readAbstractType(node, parser.readAbstractOverlayType);
-    const overlayXY = parser.readChildElement(KmlTagName.overlayXY, node, parser.readVec2Type);
-    const screenXY = parser.readChildElement(KmlTagName.screenXY, node, parser.readVec2Type);
-    const rotationXY = parser.readChildElement(KmlTagName.rotationXY, node, parser.readVec2Type);
-    const size = parser.readChildElement(KmlTagName.size, node, parser.readVec2Type);
-    const rotation = parser.readChildElement(KmlTagName.rotation, node, parser.readAngle180Type);
-
     const screenOverlayType: ScreenOverlayType = {
-      ...abstractOverlayTypeValues,
-      overlayXY,
-      screenXY,
-      rotationXY,
-      size,
-      rotation
+      ...parser.readAbstractType(node, parser.readAbstractOverlayType),
+      overlayXY: parser.readChildElement(KmlTagName.overlayXY, node, parser.readVec2Type) ??
+          {x: 1.0, y: 1.0, xunits: UnitsEnumType.fraction, yunits: UnitsEnumType.fraction},
+      screenXY: parser.readChildElement(KmlTagName.screenXY, node, parser.readVec2Type) ??
+          {x: 1.0, y: 1.0, xunits: UnitsEnumType.fraction, yunits: UnitsEnumType.fraction},
+      rotationXY: parser.readChildElement(KmlTagName.rotationXY, node, parser.readVec2Type) ??
+          {x: 1.0, y: 1.0, xunits: UnitsEnumType.fraction, yunits: UnitsEnumType.fraction},
+      size: parser.readChildElement(KmlTagName.size, node, parser.readVec2Type) ??
+          {x: 1.0, y: 1.0, xunits: UnitsEnumType.fraction, yunits: UnitsEnumType.fraction},
+      rotation: parser.readChildElement(KmlTagName.rotation, node, parser.readAngle180Type) ?? 0.0
     };
 
     return parser.kmlFactory.createScreenOverlay(screenOverlayType);
@@ -982,34 +844,21 @@ export class KMLParser {
 
   private readLink(node: any, parser: KMLParser): LinkType {
 
-    const linkTypeValues = parser.readAbstractType(node, parser.readLinkType);
-
-    const linkType: LinkType = {
-      ...linkTypeValues
-    }
-
+    const linkType: LinkType = parser.readAbstractType(node, parser.readLinkType)
     return parser.kmlFactory.createLink(linkType);
   }
 
   private readIcon(node: any, parser: KMLParser): LinkType {
 
-    const linkTypeValues = parser.readAbstractType(node, parser.readLinkType);
-
-    const linkType: LinkType = {
-      ...linkTypeValues
-    }
-
+    const linkType: LinkType = parser.readAbstractType(node, parser.readLinkType);
     return parser.kmlFactory.createIcon(linkType);
   }
 
   private readLatLonBox(node: any, parser: KMLParser): LatLonBoxType {
 
-    const abstractLatLonBoxTypeValues = parser.readAbstractType(node, parser.readAbstractLatLonBoxType);
-    const rotation = parser.readChildElement(KmlTagName.rotation, node, parser.readAngle180Type);
-
     const latLonBoxType: LatLonBoxType = {
-      ...abstractLatLonBoxTypeValues,
-      rotation
+      ...parser.readAbstractType(node, parser.readAbstractLatLonBoxType),
+      rotation: parser.readChildElement(KmlTagName.rotation, node, parser.readAngle180Type) ?? 0.0
     }
 
     return parser.kmlFactory.createLatLonBox(latLonBoxType);
@@ -1017,20 +866,13 @@ export class KMLParser {
 
   private readViewVolume(node: any, parser: KMLParser): ViewVolumeType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const leftFov = parser.readChildElement(KmlTagName.leftFov, node, parser.readAngle180Type);
-    const rightFov = parser.readChildElement(KmlTagName.rightFov, node, parser.readAngle180Type);
-    const bottomFov = parser.readChildElement(KmlTagName.bottomFov, node, parser.readAngle90Type);
-    const topFov = parser.readChildElement(KmlTagName.topFov, node, parser.readAngle90Type);
-    const near = parser.readChildElement(KmlTagName.near, node, parser.readXsDouble);
-
     const viewVolumeType: ViewVolumeType = {
-      ...abstractObjectTypeValues,
-      leftFov,
-      rightFov,
-      bottomFov,
-      topFov,
-      near
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      leftFov: parser.readChildElement(KmlTagName.leftFov, node, parser.readAngle180Type) ?? 0.0,
+      rightFov: parser.readChildElement(KmlTagName.rightFov, node, parser.readAngle180Type) ?? 0.0,
+      bottomFov: parser.readChildElement(KmlTagName.bottomFov, node, parser.readAngle90Type) ?? 0.0,
+      topFov: parser.readChildElement(KmlTagName.topFov, node, parser.readAngle90Type) ?? 0.0,
+      near: parser.readChildElement(KmlTagName.near, node, parser.readXsDouble) ?? 0.0
     }
 
     return parser.kmlFactory.createViewVolume(viewVolumeType);
@@ -1038,18 +880,12 @@ export class KMLParser {
 
   private readImagePyramid(node: any, parser: KMLParser): ImagePyramidType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const tileSize = parser.readChildElement(KmlTagName.tileSize, node, parser.readXsInt);
-    const maxWidth = parser.readChildElement(KmlTagName.maxWidth, node, parser.readXsInt);
-    const maxHeight = parser.readChildElement(KmlTagName.maxHeight, node, parser.readXsInt);
-    const gridOrigin = parser.readChildElement(KmlTagName.gridOrigin, node, parser.readGridOriginEnumType);
-
     const imagePyramidType: ImagePyramidType = {
-      ...abstractObjectTypeValues,
-      tileSize,
-      maxWidth,
-      maxHeight,
-      gridOrigin
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      tileSize: parser.readChildElement(KmlTagName.tileSize, node, parser.readXsInt) ?? 256,
+      maxWidth: parser.readChildElement(KmlTagName.maxWidth, node, parser.readXsInt) ?? 0,
+      maxHeight: parser.readChildElement(KmlTagName.maxHeight, node, parser.readXsInt) ?? 0,
+      gridOrigin: parser.readChildElement(KmlTagName.gridOrigin, node, parser.readGridOriginEnumType) ?? GridOriginEnumType.lowerLeft
     }
 
     return parser.kmlFactory.createImagePyramid(imagePyramidType);
@@ -1057,24 +893,15 @@ export class KMLParser {
 
   private readCamera(node: any, parser: KMLParser): CameraType {
 
-    const abstractViewTypeValues = parser.readAbstractType(node, parser.readAbstractViewType);
-    const longitude = parser.readChildElement(KmlTagName.longitude, node, parser.readAngle180Type);
-    const latitude = parser.readChildElement(KmlTagName.latitude, node, parser.readAngle90Type);
-    const altitude = parser.readChildElement(KmlTagName.altitude, node, parser.readXsDouble);
-    const heading = parser.readChildElement(KmlTagName.heading, node, parser.readAngle360Type);
-    const tilt = parser.readChildElement(KmlTagName.tilt, node, parser.readAngle180Type);
-    const roll = parser.readChildElement(KmlTagName.roll, node, parser.readAngle180Type);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-
     const cameraType: CameraType = {
-      ...abstractViewTypeValues,
-      longitude,
-      latitude,
-      altitude,
-      heading,
-      tilt,
-      roll,
-      altitudeMode
+      ...parser.readAbstractType(node, parser.readAbstractViewType),
+      longitude: parser.readChildElement(KmlTagName.longitude, node, parser.readAngle180Type) ?? 0.0,
+      latitude: parser.readChildElement(KmlTagName.latitude, node, parser.readAngle90Type) ?? 0.0,
+      altitude: parser.readChildElement(KmlTagName.altitude, node, parser.readXsDouble) ?? 0.0,
+      heading: parser.readChildElement(KmlTagName.heading, node, parser.readAngle360Type) ?? 0.0,
+      tilt: parser.readChildElement(KmlTagName.tilt, node, parser.readAngle180Type) ?? 0.0,
+      roll: parser.readChildElement(KmlTagName.roll, node, parser.readAngle180Type) ?? 0.0,
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround
     }
 
     return parser.kmlFactory.createCamera(cameraType);
@@ -1082,24 +909,15 @@ export class KMLParser {
 
   private readLookAt(node: any, parser: KMLParser): LookAtType {
 
-    const abstractViewTypeValues = parser.readAbstractType(node, parser.readAbstractViewType);
-    const longitude = parser.readChildElement(KmlTagName.longitude, node, parser.readAngle180Type);
-    const latitude = parser.readChildElement(KmlTagName.latitude, node, parser.readAngle90Type);
-    const altitude = parser.readChildElement(KmlTagName.altitude, node, parser.readXsDouble);
-    const heading = parser.readChildElement(KmlTagName.heading, node, parser.readAngle360Type);
-    const tilt = parser.readChildElement(KmlTagName.tilt, node, parser.readAngle180Type);
-    const range = parser.readChildElement(KmlTagName.range, node, parser.readXsDouble);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-
     const lookAtType: LookAtType = {
-      ...abstractViewTypeValues,
-      longitude,
-      latitude,
-      altitude,
-      heading,
-      tilt,
-      range,
-      altitudeMode
+      ...parser.readAbstractType(node, parser.readAbstractViewType),
+      longitude: parser.readChildElement(KmlTagName.longitude, node, parser.readAngle180Type) ?? 0.0,
+      latitude: parser.readChildElement(KmlTagName.latitude, node, parser.readAngle90Type) ?? 0.0,
+      altitude: parser.readChildElement(KmlTagName.altitude, node, parser.readXsDouble) ?? 0.0,
+      heading: parser.readChildElement(KmlTagName.heading, node, parser.readAngle360Type) ?? 0.0,
+      tilt: parser.readChildElement(KmlTagName.tilt, node, parser.readAngle180Type) ?? 0.0,
+      range: parser.readChildElement(KmlTagName.range, node, parser.readXsDouble) ?? 0.0,
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround
     }
 
     return parser.kmlFactory.createLookAt(lookAtType);
@@ -1107,14 +925,10 @@ export class KMLParser {
 
   private readTimeSpan(node: any, parser: KMLParser): TimeSpanType {
 
-    const abstractTimePrimitiveTypeValues = parser.readAbstractType(node, parser.readAbstractTimePrimitiveType);
-    const begin = parser.readChildElement(KmlTagName.begin, node, parser.readDateTimeType);
-    const end = parser.readChildElement(KmlTagName.end, node, parser.readDateTimeType);
-
     const timeSpanType: TimeSpanType = {
-      ...abstractTimePrimitiveTypeValues,
-      begin,
-      end
+      ...parser.readAbstractType(node, parser.readAbstractTimePrimitiveType),
+      begin: parser.readChildElement(KmlTagName.begin, node, parser.readDateTimeType),
+      end: parser.readChildElement(KmlTagName.end, node, parser.readDateTimeType)
     }
 
     return parser.kmlFactory.createTimeSpan(timeSpanType);
@@ -1122,12 +936,9 @@ export class KMLParser {
 
   private readTimeStamp(node: any, parser: KMLParser): TimeStampType {
 
-    const abstractTimePrimitiveTypeValues = parser.readAbstractType(node, parser.readAbstractTimePrimitiveType);
-    const when = parser.readChildElement(KmlTagName.when, node, parser.readDateTimeType);
-
     const timeStampType: TimeStampType = {
-      ...abstractTimePrimitiveTypeValues,
-      when
+      ...parser.readAbstractType(node, parser.readAbstractTimePrimitiveType),
+      when: parser.readChildElement(KmlTagName.when, node, parser.readDateTimeType)
     }
 
     return parser.kmlFactory.createTimeStamp(timeStampType);
@@ -1135,22 +946,14 @@ export class KMLParser {
 
   private readStyle(node: any, parser: KMLParser): StyleType {
 
-    const abstractStyleSelectorTypeValues = parser.readAbstractType(node, parser.readAbstractStyleSelectorType);
-    const iconStyle = parser.readChildElement(KmlTagName.IconStyle, node, parser.readIconStyle);
-    const labelStyle = parser.readChildElement(KmlTagName.LabelStyle, node, parser.readLabelStyle);
-    const lineStyle = parser.readChildElement(KmlTagName.LineStyle, node, parser.readLineStyle);
-    const polyStyle = parser.readChildElement(KmlTagName.PolyStyle, node, parser.readPolyStyle);
-    const balloonStyle = parser.readChildElement(KmlTagName.BalloonStyle, node, parser.readBalloonStyle);
-    const listStyle = parser.readChildElement(KmlTagName.ListStyle, node, parser.readListStyle);
-
     const styleType: StyleType = {
-      ...abstractStyleSelectorTypeValues,
-      iconStyle,
-      labelStyle,
-      lineStyle,
-      polyStyle,
-      balloonStyle,
-      listStyle
+      ...parser.readAbstractType(node, parser.readAbstractStyleSelectorType),
+      iconStyle: parser.readChildElement(KmlTagName.IconStyle, node, parser.readIconStyle),
+      labelStyle: parser.readChildElement(KmlTagName.LabelStyle, node, parser.readLabelStyle),
+      lineStyle: parser.readChildElement(KmlTagName.LineStyle, node, parser.readLineStyle),
+      polyStyle: parser.readChildElement(KmlTagName.PolyStyle, node, parser.readPolyStyle),
+      balloonStyle: parser.readChildElement(KmlTagName.BalloonStyle, node, parser.readBalloonStyle),
+      listStyle: parser.readChildElement(KmlTagName.ListStyle, node, parser.readListStyle)
     }
 
     return parser.kmlFactory.createStyle(styleType);
@@ -1158,12 +961,9 @@ export class KMLParser {
 
   private readStyleMap(node: any, parser: KMLParser): StyleMapType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const pair = parser.readChildElementArray(KmlTagName.Pair, node, parser.readPair);
-
     const styleMapType: StyleMapType = {
-      ...abstractObjectTypeValues,
-      pair
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      pair: parser.readChildElementArray(KmlTagName.Pair, node, parser.readPair)
     }
 
     return parser.kmlFactory.createStyleMap(styleMapType);
@@ -1171,16 +971,11 @@ export class KMLParser {
 
   private readPair(node: any, parser: KMLParser): PairType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const key = parser.readChildElement(KmlTagName.key, node, parser.readStyleStateEnumType);
-    const styleUrl = parser.readChildElement(KmlTagName.styleUrl, node, parser.readXsAnyUri);
-    const styleSelector = parser.readAbstractType(node, parser.readAbstractStyleSelectorGroup);
-
     const pairType: PairType = {
-      ...abstractObjectTypeValues,
-      key,
-      styleUrl,
-      styleSelector
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      key: parser.readChildElement(KmlTagName.key, node, parser.readStyleStateEnumType) ?? StyleStateEnumType.normal,
+      styleUrl: parser.readChildElement(KmlTagName.styleUrl, node, parser.readXsAnyUri),
+      styleSelector: parser.readAbstractType(node, parser.readAbstractStyleSelectorGroup)
     }
 
     return parser.kmlFactory.createPair(pairType);
@@ -1188,18 +983,12 @@ export class KMLParser {
 
   private readBalloonStyle(node: any, parser: KMLParser): BalloonStyleType {
 
-    const abstractSubStyleTypeValues = parser.readAbstractType(node, parser.readAbstractSubStyleType);
-    const bgColor = parser.readChildElement(KmlTagName.bgColor, node, parser.readColorType);
-    const textColor = parser.readChildElement(KmlTagName.textColor, node, parser.readColorType);
-    const text = parser.readChildElement(KmlTagName.text, node, parser.readXsString);
-    const displayMode = parser.readChildElement(KmlTagName.displayMode, node, parser.readDisplayModeEnumType);
-
     const balloonStyleType: BalloonStyleType = {
-      ...abstractSubStyleTypeValues,
-      bgColor,
-      textColor,
-      text,
-      displayMode
+      ...parser.readAbstractType(node, parser.readAbstractSubStyleType),
+      bgColor: parser.readChildElement(KmlTagName.bgColor, node, parser.readColorType) ?? 'ffffffff',
+      textColor: parser.readChildElement(KmlTagName.textColor, node, parser.readColorType) ?? 'ffffffff',
+      text: parser.readChildElement(KmlTagName.text, node, parser.readXsString) ?? '',
+      displayMode: parser.readChildElement(KmlTagName.displayMode, node, parser.readDisplayModeEnumType) ?? DisplayModeEnumType.default
     }
 
     return parser.kmlFactory.createBalloonStyle(balloonStyleType);
@@ -1207,18 +996,13 @@ export class KMLParser {
 
   private readIconStyle(node: any, parser: KMLParser): IconStyleType {
 
-    const abstractColorStyleTypeValues = parser.readAbstractType(node, parser.readAbstractColorStyleType);
-    const scale = parser.readChildElement(KmlTagName.scale, node, parser.readXsDouble);
-    const heading = parser.readChildElement(KmlTagName.heading, node, parser.readAngle360Type);
-    const icon = parser.readChildElement(KmlTagName.Icon, node, parser.readBasicLinkType);
-    const hotSpot = parser.readChildElement(KmlTagName.hotSpot, node, parser.readVec2Type);
-
     const iconStyleType: IconStyleType = {
-      ...abstractColorStyleTypeValues,
-      scale,
-      heading,
-      icon,
-      hotSpot
+      ...parser.readAbstractType(node, parser.readAbstractColorStyleType),
+      scale: parser.readChildElement(KmlTagName.scale, node, parser.readXsDouble) ?? 1.0,
+      heading: parser.readChildElement(KmlTagName.heading, node, parser.readAngle360Type) ?? 0.0,
+      icon: parser.readChildElement(KmlTagName.Icon, node, parser.readBasicLinkType),
+      hotSpot: parser.readChildElement(KmlTagName.hotSpot, node, parser.readVec2Type) ??
+          {x: 1.0, y: 1.0, xunits: UnitsEnumType.fraction, yunits: UnitsEnumType.fraction}
     }
 
     return parser.kmlFactory.createIconStyle(iconStyleType);
@@ -1226,12 +1010,9 @@ export class KMLParser {
 
   private readLabelStyle(node: any, parser: KMLParser): LabelStyleType {
 
-    const abstractColorStyleTypeValues = parser.readAbstractType(node, parser.readAbstractColorStyleType);
-    const scale = parser.readChildElement(KmlTagName.scale, node, parser.readXsDouble);
-
     const labelStyleType: LabelStyleType = {
-      ...abstractColorStyleTypeValues,
-      scale
+      ...parser.readAbstractType(node, parser.readAbstractColorStyleType),
+      scale: parser.readChildElement(KmlTagName.scale, node, parser.readXsDouble) ?? 1.0
     }
 
     return parser.kmlFactory.createLabelStyle(labelStyleType);
@@ -1239,12 +1020,9 @@ export class KMLParser {
 
   private readLineStyle(node: any, parser: KMLParser): LineStyleType {
 
-    const abstractColorStyleTypeValues = parser.readAbstractType(node, parser.readAbstractColorStyleType);
-    const width = parser.readChildElement(KmlTagName.width, node, parser.readXsDouble);
-
     const lineStyleType: LineStyleType = {
-      ...abstractColorStyleTypeValues,
-      width
+      ...parser.readAbstractType(node, parser.readAbstractColorStyleType),
+      width: parser.readChildElement(KmlTagName.width, node, parser.readXsDouble) ?? 1.0
     }
 
     return parser.kmlFactory.createLineStyle(lineStyleType);
@@ -1252,15 +1030,10 @@ export class KMLParser {
 
   private readPolyStyle(node: any, parser: KMLParser): PolyStyleType {
 
-    const abstractColorStyleTypeValues = parser.readAbstractType(node, parser.readAbstractColorStyleType);
-
-    const fill = parser.readChildElement(KmlTagName.fill, node, parser.readXsBoolean);
-    const outline = parser.readChildElement(KmlTagName.outline, node, parser.readXsBoolean);
-
     const polyStyleType: PolyStyleType = {
-      ...abstractColorStyleTypeValues,
-      fill,
-      outline
+      ...parser.readAbstractType(node, parser.readAbstractColorStyleType),
+      fill: parser.readChildElement(KmlTagName.fill, node, parser.readXsBoolean) ?? true,
+      outline: parser.readChildElement(KmlTagName.outline, node, parser.readXsBoolean) ?? true
     }
 
     return parser.kmlFactory.createPolyStyle(polyStyleType);
@@ -1268,18 +1041,12 @@ export class KMLParser {
 
   private readListStyle(node: any, parser: KMLParser): ListStyleType {
 
-    const abstractColorStyleTypeValues = parser.readAbstractType(node, parser.readAbstractColorStyleType);
-    const listItemType = parser.readChildElement(KmlTagName.listItemType, node, parser.readListItemTypeEnumType);
-    const bgColor = parser.readChildElement(KmlTagName.bgColor, node, parser.readColorType);
-    const itemIcon = parser.readChildElementArray(KmlTagName.ItemIcon, node, parser.readItemIcon);
-    const maxSnippetLines = parser.readChildElement(KmlTagName.maxSnippetLines, node, parser.readXsInt);
-
     const listStyleType: ListStyleType = {
-      ...abstractColorStyleTypeValues,
-      listItemType,
-      bgColor,
-      itemIcon,
-      maxSnippetLines
+      ...parser.readAbstractType(node, parser.readAbstractColorStyleType),
+      listItemType: parser.readChildElement(KmlTagName.listItemType, node, parser.readListItemTypeEnumType) ?? ListItemTypeEnumType.check,
+      bgColor: parser.readChildElement(KmlTagName.bgColor, node, parser.readColorType) ?? 'ffffffff',
+      itemIcon: parser.readChildElementArray(KmlTagName.ItemIcon, node, parser.readItemIcon),
+      maxSnippetLines: parser.readChildElement(KmlTagName.maxSnippetLines, node, parser.readXsInt) ?? 2
     }
 
     return parser.kmlFactory.createListStyle(listStyleType);
@@ -1287,14 +1054,10 @@ export class KMLParser {
 
   private readItemIcon(node: any, parser: KMLParser): ItemIconType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const state = parser.readChildElement(KmlTagName.state, node, parser.readItemIconStateType);
-    const href = parser.readChildElement(KmlTagName.href, node, parser.readXsString);
-
     const itemIconType: ItemIconType = {
-      ...abstractObjectTypeValues,
-      state,
-      href
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      state: parser.readChildElement(KmlTagName.state, node, parser.readItemIconStateType),
+      href: parser.readChildElement(KmlTagName.href, node, parser.readXsString) ?? ''
     }
 
     return parser.kmlFactory.createItemIcon(itemIconType);
@@ -1302,14 +1065,10 @@ export class KMLParser {
 
   private readRegion(node: any, parser: KMLParser): RegionType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const latLonAltBox = parser.readChildElement(KmlTagName.LatLonAltBox, node, parser.readLatLonAltBox);
-    const lod = parser.readChildElement(KmlTagName.Lod, node, parser.readLod);
-
     const regionType: RegionType = {
-      ...abstractObjectTypeValues,
-      latLonAltBox,
-      lod
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      latLonAltBox: parser.readChildElement(KmlTagName.LatLonAltBox, node, parser.readLatLonAltBox),
+      lod: parser.readChildElement(KmlTagName.Lod, node, parser.readLod)
     }
 
     return parser.kmlFactory.createRegion(regionType);
@@ -1317,16 +1076,11 @@ export class KMLParser {
 
   private readLatLonAltBox(node: any, parser: KMLParser): LatLonAltBoxType {
 
-    const abstractLatLonBoxTypeValues = parser.readAbstractType(node, parser.readAbstractLatLonBoxType);
-    const minAltitude = parser.readChildElement(KmlTagName.minAltitude, node, parser.readXsDouble);
-    const maxAltitude = parser.readChildElement(KmlTagName.maxAltitude, node, parser.readXsDouble);
-    const altitudeMode = parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup);
-
     const latLonAltBoxType: LatLonAltBoxType = {
-      ...abstractLatLonBoxTypeValues,
-      minAltitude,
-      maxAltitude,
-      altitudeMode
+      ...parser.readAbstractType(node, parser.readAbstractLatLonBoxType),
+      minAltitude: parser.readChildElement(KmlTagName.minAltitude, node, parser.readXsDouble) ?? 0.0,
+      maxAltitude: parser.readChildElement(KmlTagName.maxAltitude, node, parser.readXsDouble) ?? 0.0,
+      altitudeMode: parser.readChildElement(KmlTagName.altitudeMode, node, parser.readAltitudeModeGroup) ?? AltitudeModeEnumType.clampToGround
     }
 
     return parser.kmlFactory.createLatLonAltBox(latLonAltBoxType);
@@ -1334,33 +1088,24 @@ export class KMLParser {
 
   private readLod(node: any, parser: KMLParser): LodType {
 
-    const abstractLatLonBoxTypeValues = parser.readAbstractType(node, parser.readAbstractLatLonBoxType);
-    const minLodPixels = parser.readChildElement(KmlTagName.minLodPixels, node, parser.readXsDouble);
-    const maxLodPixels = parser.readChildElement(KmlTagName.maxLodPixels, node, parser.readXsDouble);
-    const minFadeExtent = parser.readChildElement(KmlTagName.minFadeExtent, node, parser.readXsDouble);
-    const maxFadeExtent = parser.readChildElement(KmlTagName.maxFadeExtent, node, parser.readXsDouble);
-
     const lodType: LodType = {
-      ...abstractLatLonBoxTypeValues,
-      minLodPixels,
-      maxLodPixels,
-      minFadeExtent,
-      maxFadeExtent
+      ...parser.readAbstractType(node, parser.readAbstractLatLonBoxType),
+      minLodPixels: parser.readChildElement(KmlTagName.minLodPixels, node, parser.readXsDouble) ?? 0.0,
+      maxLodPixels: parser.readChildElement(KmlTagName.maxLodPixels, node, parser.readXsDouble) ?? -1.0,
+      minFadeExtent: parser.readChildElement(KmlTagName.minFadeExtent, node, parser.readXsDouble) ?? 0.0,
+      maxFadeExtent: parser.readChildElement(KmlTagName.maxFadeExtent, node, parser.readXsDouble) ?? 0.0
     }
 
     return parser.kmlFactory.createLod(lodType);
   }
 
-  // TODO: parse any
+
   private readExtendedData(node: any, parser: KMLParser): ExtendedDataType {
 
-    const data = parser.readChildElementArray(KmlTagName.Data, node, parser.readData);
-    const schemaData = parser.readChildElementArray(KmlTagName.SchemaData, node, parser.readSchemaData);
-
     const extendedDataType: ExtendedDataType = {
-      data,
-      schemaData,
-      any: []
+      data: parser.readChildElementArray(KmlTagName.Data, node, parser.readData),
+      schemaData: parser.readChildElementArray(KmlTagName.SchemaData, node, parser.readSchemaData),
+      any: [] // TODO: parse any
     }
 
     return parser.kmlFactory.createExtendedData(extendedDataType);
@@ -1368,17 +1113,11 @@ export class KMLParser {
 
   private readData(node: any, parser: KMLParser): DataType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-
-    const name = parser.readAttribute(KmlAttributeName.name, node, parser.readXsString);
-    const displayName = parser.readChildElement(KmlTagName.displayName, node, parser.readXsString);
-    const value = parser.readChildElement(KmlTagName.value, node, parser.readXsString);
-
     const dataType: DataType = {
-      ...abstractObjectTypeValues,
-      name,
-      displayName,
-      value
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      name: parser.readAttribute(KmlAttributeName.name, node, parser.readXsString) ?? '',
+      displayName: parser.readChildElement(KmlTagName.displayName, node, parser.readXsString) ?? '',
+      value: parser.readChildElement(KmlTagName.value, node, parser.readXsString) ?? ''
     }
 
     return parser.kmlFactory.createData(dataType);
@@ -1386,14 +1125,10 @@ export class KMLParser {
 
   private readSchemaData(node: any, parser: KMLParser): SchemaDataType {
 
-    const abstractObjectTypeValues = parser.readAbstractType(node, parser.readAbstractObjectType);
-    const schemaUrl = parser.readAttribute(KmlAttributeName.schemaUrl, node, parser.readXsAnyUri);
-    const simpleData = parser.readChildElementArray(KmlTagName.SimpleData, node, parser.readSimpleData);
-
     const schemaDataType: SchemaDataType = {
-      ...abstractObjectTypeValues,
-      schemaUrl,
-      simpleData
+      ...parser.readAbstractType(node, parser.readAbstractObjectType),
+      schemaUrl: parser.readAttribute(KmlAttributeName.schemaUrl, node, parser.readXsAnyUri),
+      simpleData: parser.readChildElementArray(KmlTagName.SimpleData, node, parser.readSimpleData)
     }
 
     return parser.kmlFactory.createSchemaData(schemaDataType);
@@ -1401,12 +1136,9 @@ export class KMLParser {
 
   private readSimpleData(node: any, parser: KMLParser): SimpleDataType {
 
-    const name = parser.readAttribute(KmlAttributeName.name, node, parser.readXsString);
-    const textContent = parser.readTextContent(node);
-
     const simpleDataType: SimpleDataType = {
-      name,
-      textContent
+      name: parser.readAttribute(KmlAttributeName.name, node, parser.readXsString) ?? '',
+      textContent: parser.readTextContent(node) ?? ''
     };
 
     return parser.kmlFactory.createSimpleData(simpleDataType);
@@ -1414,28 +1146,17 @@ export class KMLParser {
 
   private readNetworkLinkControl(node: any, parser: KMLParser): NetworkLinkControlType {
 
-    const minRefreshPeriod = parser.readChildElement(KmlTagName.minRefreshPeriod, node, parser.readXsDouble);
-    const maxSessionLength = parser.readChildElement(KmlTagName.maxSessionLength, node, parser.readXsDouble);
-    const cookie = parser.readChildElement(KmlTagName.cookie, node, parser.readXsString);
-    const message = parser.readChildElement(KmlTagName.message, node, parser.readXsString);
-    const linkName = parser.readChildElement(KmlTagName.linkName, node, parser.readXsString);
-    const linkDescription = parser.readChildElement(KmlTagName.linkDescription, node, parser.readXsString);
-    const linkSnippet = parser.readChildElement(KmlTagName.linkSnippet, node, parser.readXsString);
-    const expires = parser.readChildElement(KmlTagName.expires, node, parser.readDateTimeType);
-    const update = parser.readChildElement(KmlTagName.Update, node, parser.readUpdate);
-    const view = parser.readAbstractType(node, parser.readAbstractViewGroup);
-
     const networkLinkControlType: NetworkLinkControlType = {
-      minRefreshPeriod,
-      maxSessionLength,
-      cookie,
-      message,
-      linkName,
-      linkDescription,
-      linkSnippet,
-      expires,
-      update,
-      view
+      minRefreshPeriod: parser.readChildElement(KmlTagName.minRefreshPeriod, node, parser.readXsDouble) ?? 0.0,
+      maxSessionLength: parser.readChildElement(KmlTagName.maxSessionLength, node, parser.readXsDouble) ?? -1.0,
+      cookie: parser.readChildElement(KmlTagName.cookie, node, parser.readXsString) ?? '',
+      message: parser.readChildElement(KmlTagName.message, node, parser.readXsString) ?? '',
+      linkName: parser.readChildElement(KmlTagName.linkName, node, parser.readXsString) ?? '',
+      linkDescription: parser.readChildElement(KmlTagName.linkDescription, node, parser.readXsString) ?? '',
+      linkSnippet: parser.readChildElement(KmlTagName.linkSnippet, node, parser.readXsString) ?? '',
+      expires: parser.readChildElement(KmlTagName.expires, node, parser.readDateTimeType),
+      update: parser.readChildElement(KmlTagName.Update, node, parser.readUpdate),
+      view: parser.readAbstractType(node, parser.readAbstractViewGroup)
     }
 
     return parser.kmlFactory.createNetworkLinkControl(networkLinkControlType);
@@ -1464,10 +1185,8 @@ export class KMLParser {
 
   private readCreate(node: any, parser: KMLParser): CreateType {
 
-    const container = parser.readAbstractTypeArray(node, parser.readAbstractContainerGroupArray);
-
     const createType: CreateType = {
-      container
+      container: parser.readAbstractTypeArray(node, parser.readAbstractContainerGroupArray)
     }
 
     return parser.kmlFactory.createCreate(createType);
@@ -1475,10 +1194,8 @@ export class KMLParser {
 
   private readDelete(node: any, parser: KMLParser): DeleteType {
 
-    const feature = parser.readAbstractTypeArray(node, parser.readAbstractFeatureGroupArray);
-
     const deleteType: DeleteType = {
-      feature
+      feature: parser.readAbstractTypeArray(node, parser.readAbstractFeatureGroupArray)
     }
 
     return parser.kmlFactory.createDelete(deleteType);
@@ -1486,10 +1203,8 @@ export class KMLParser {
 
   private readChange(node: any, parser: KMLParser): ChangeType {
 
-    const object = parser.readAbstractTypeArray(node, parser.readAbstractObjectGroupArray);
-
     const changeType: ChangeType = {
-      object
+      object: parser.readAbstractTypeArray(node, parser.readAbstractObjectGroupArray)
     }
 
     return parser.kmlFactory.createChange(changeType);
@@ -1497,14 +1212,10 @@ export class KMLParser {
 
   private readAtomAuthor(node: any, parser: KMLParser): AtomPersonConstruct {
 
-    const name = parser.readChildElementArray(AtomTagName.name, node, parser.readXsString);
-    const uri = parser.readChildElementArray(AtomTagName.uri, node, parser.readXsString);
-    const email = parser.readChildElementArray(AtomTagName.email, node, parser.readXsString);
-
     const atomPersonConstruct: AtomPersonConstruct = {
-      name,
-      uri,
-      email
+      name: parser.readChildElementArray(AtomTagName.name, node, parser.readXsString),
+      uri: parser.readChildElementArray(AtomTagName.uri, node, parser.readXsString),
+      email: parser.readChildElementArray(AtomTagName.email, node, parser.readXsString)
     };
 
     return parser.kmlFactory.createAtomAuthor(atomPersonConstruct);
@@ -1513,11 +1224,6 @@ export class KMLParser {
   private readAtomLink(node: any, parser: KMLParser): AtomLink {
 
     const href = parser.readAttribute(AtomAttributeName.href, node, parser.readXsString);
-    const rel = parser.readAttribute(AtomAttributeName.rel, node, parser.readXsString);
-    const type = parser.readAttribute(AtomAttributeName.type, node, parser.readXsString);
-    const hreflang = parser.readAttribute(AtomAttributeName.hreflang, node, parser.readXsString);
-    const title = parser.readAttribute(AtomAttributeName.title, node, parser.readXsString);
-    const length = parser.readAttribute(AtomAttributeName.length, node, parser.readXsString);
 
     if (href === undefined) {
       throw new Error('href attribute on atom:link is required');
@@ -1525,11 +1231,11 @@ export class KMLParser {
 
     const atomLink: AtomLink = {
       href,
-      rel,
-      type,
-      hreflang,
-      title,
-      length
+      rel: parser.readAttribute(AtomAttributeName.rel, node, parser.readXsString),
+      type: parser.readAttribute(AtomAttributeName.type, node, parser.readXsString),
+      hreflang: parser.readAttribute(AtomAttributeName.hreflang, node, parser.readXsString),
+      title: parser.readAttribute(AtomAttributeName.title, node, parser.readXsString),
+      length: parser.readAttribute(AtomAttributeName.length, node, parser.readXsString)
     };
 
     return parser.kmlFactory.createAtomLink(atomLink);
@@ -1756,25 +1462,11 @@ export class KMLParser {
   }
 
   private readVec2Type(value: any, parser: KMLParser): Vec2Type {
-
-    const x = parser.readAttribute(KmlAttributeName.x, value, parser.readXsDouble);
-    const y = parser.readAttribute(KmlAttributeName.y, value, parser.readXsDouble);
-    const xunits = parser.readAttribute(KmlAttributeName.xunits, value, parser.readUnitsEnumType);
-    const yunits = parser.readAttribute(KmlAttributeName.yunits, value, parser.readUnitsEnumType);
-
-    if (x === undefined) {
-      throw new Error('Attribute \'x\' is required on \'vec2Type\'');
-    }
-
-    if (y === undefined) {
-      throw new Error('Attribute \'y\' is required on \'vec2Type\'');
-    }
-
     return {
-      x,
-      y,
-      xunits,
-      yunits
+      x: parser.readAttribute(KmlAttributeName.x, value, parser.readXsDouble) ?? 1.0,
+      y: parser.readAttribute(KmlAttributeName.y, value, parser.readXsDouble) ?? 1.0,
+      xunits: parser.readAttribute(KmlAttributeName.xunits, value, parser.readUnitsEnumType) ?? UnitsEnumType.fraction,
+      yunits: parser.readAttribute(KmlAttributeName.yunits, value, parser.readUnitsEnumType) ?? UnitsEnumType.fraction
     };
   }
 
@@ -1849,13 +1541,8 @@ export class KMLParser {
     });
   }
 
-  private readBoundaryType(node: any, parser: KMLParser): BoundaryType {
-
-    const linearRing = parser.readChildElement(KmlTagName.LinearRing, node, parser.readLinearRing);
-
-    return {
-      ...linearRing
-    }
+  private readBoundaryType(node: any, parser: KMLParser): BoundaryType | undefined {
+    return parser.readChildElement(KmlTagName.LinearRing, node, parser.readLinearRing);
   }
 
   private readBoundaryTypeArray(node: any, parser: KMLParser): BoundaryType[] {

@@ -4,7 +4,7 @@ import {ItemIconStateType} from './item-icon-state.type';
 export interface ItemIconType extends AbstractObjectType {
 
   // Child elements
-  state: ItemIconStateType;
+  state?: ItemIconStateType;
   href: string;
 
 }

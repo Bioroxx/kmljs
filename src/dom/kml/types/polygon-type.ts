@@ -8,7 +8,7 @@ export interface PolygonType extends AbstractGeometryType {
   extrude: boolean;
   tessellate: boolean;
   altitudeMode: AltitudeModeGroup;
-  outerBoundaryIs: BoundaryType;
+  outerBoundaryIs?: BoundaryType;
   innerBoundaryIs: BoundaryType[];
 
 }

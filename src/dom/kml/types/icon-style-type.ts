@@ -8,7 +8,7 @@ export interface IconStyleType extends AbstractColorStyleType {
   // Child elements
   scale: number;
   heading: Angle360Type;
-  icon: BasicLinkType;
+  icon?: BasicLinkType;
   hotSpot: Vec2Type;
 
 }

@@ -103,6 +103,8 @@ import {AbstractStyleSelectorType} from '../dom/kml/types/abstract-style-selecto
 import {AtomPersonConstruct} from '../dom/atom/atom-person-construct';
 import {AtomAuthor} from '../dom/atom/atom-author';
 import {AtomLink} from '../dom/atom/atom-link';
+import {ImagePyramidType} from '../dom/kml/types/image-pyramid-type';
+import {ImagePyramid} from '../dom/kml/image-pyramid';
 
 export class KMLFactory {
 
@@ -216,8 +218,8 @@ export class KMLFactory {
     return new ViewVolume(obj);
   }
 
-  createImagePyramid(obj: ViewVolumeType): ViewVolumeType {
-    return new ViewVolume(obj);
+  createImagePyramid(obj: ImagePyramidType): ImagePyramidType {
+    return new ImagePyramid(obj);
   }
 
   createNetworkLink(obj: NetworkLinkType): NetworkLinkType {

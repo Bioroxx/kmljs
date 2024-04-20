@@ -8,7 +8,7 @@ export class Polygon extends AbstractGeometryGroup implements PolygonType {
   extrude: boolean;
   tessellate: boolean;
   altitudeMode: AltitudeModeGroup;
-  outerBoundaryIs: BoundaryType;
+  outerBoundaryIs?: BoundaryType;
   innerBoundaryIs: BoundaryType[];
 
   constructor(polygonType: PolygonType) {

@@ -8,7 +8,7 @@ export class IconStyle extends AbstractColorStyleGroup implements IconStyleType 
 
   scale: number;
   heading: Angle360Type;
-  icon: BasicLinkType;
+  icon?: BasicLinkType;
   hotSpot: Vec2Type;
 
   constructor(iconStyleType: IconStyleType) {
