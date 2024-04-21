@@ -1,13 +1,21 @@
 # kml.js
 
-An Open Geospatial Consortium KML 2.2.0 reference implementation ([Link](https://www.ogc.org/standard/kml))
-
-> **_NOTE:_**  This library is currently under development and not thoroughly testet!
+A customizable and extendable KML 2.2.0 parser framework
 
 ## Installation
 
+For the time being, kml.js has to be built from source and installed into your project manually.
+Future plans include to publish kml.js on `npm`.
+
 ````shell
-npm install @bioroxx/kmljs
+# Build and pack kml.js to a .tgz archive
+npm pack
+
+# Copy .tgz into your project
+cp ./bioroxx-kmljs.tgz /path-to-your-project/lib/
+
+# Install in your project
+npm install ./lib/bioroxx-kmljs.tgz
 ````
 
 ## Usage
@@ -59,9 +67,8 @@ const kml = kmlParser.parse(kmlFileString);
 
 ## Roadmap
 
-- [ ] Parsing and Testing
+- [ ] Parsing
     - [x] `kml` namespace elements
     - [x] `atom` namespace elements
     - [ ] `xal` namespace elements
 - [ ] Serialization
-- [ ] Serialization tests
