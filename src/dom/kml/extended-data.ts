@@ -1,11 +1,11 @@
-import {Data} from './data';
-import {SchemaData} from './schema-data';
 import {ExtendedDataType} from './types/extended-data-type';
+import {DataType} from './types/data-type';
+import {SchemaDataType} from './types/schema-data-type';
 
 export class ExtendedData implements ExtendedDataType {
 
-  data: Data[];
-  schemaData: SchemaData[];
+  data: DataType[];
+  schemaData: SchemaDataType[];
   any: any[]; // Arbitrary XML elements
 
   constructor(extendedDataType: ExtendedDataType) {

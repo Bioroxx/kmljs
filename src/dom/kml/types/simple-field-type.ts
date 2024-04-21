@@ -1,10 +1,10 @@
 export interface SimpleFieldType {
 
   // Attributes
-  type?: string;
-  name?: string;
+  type: string;
+  name: string;
 
   // Child elements
-  displayName?: string;
+  displayName: string;
 
 }

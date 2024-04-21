@@ -2,7 +2,7 @@ import {Delete} from './delete';
 import {Create} from './create';
 import {Change} from './change';
 import {UpdateType} from './types/update-type';
-import {AnyURI} from '../xsd/anyURI';
+import {AnyURI} from '../xs/anyURI';
 
 export class Update implements UpdateType {
 

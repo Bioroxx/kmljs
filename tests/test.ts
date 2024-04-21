@@ -6,10 +6,16 @@ import {
   AbstractStyleSelectorType,
   AbstractSubStyleType,
   AbstractViewType,
+  AltitudeModeEnumType,
+  AtomAuthor,
+  AtomLink,
+  AtomPersonConstruct,
   BalloonStyleType,
   Camera,
   CameraType,
+  ColorModeEnumType,
   DataType,
+  DisplayModeEnumType,
   Document,
   ExtendedData,
   ExtendedDataType,
@@ -26,6 +32,7 @@ import {
   LineString,
   LineStringType,
   LineStyleType,
+  ListItemTypeEnumType,
   ListStyleType,
   LodType,
   LookAt,
@@ -49,7 +56,8 @@ import {
   StyleMap,
   StyleType,
   TimeSpan,
-  TimeStamp
+  TimeStamp,
+  UnitsEnumType
 } from '../src';
 import {get} from 'lodash';
 import {XMLParser} from 'fast-xml-parser';
@@ -83,6 +91,16 @@ test('Parses KML file', () => {
   expect(document.snippet).toEqual(get(expected, 'kml.Document.snippet'));
   expect(document.description).toEqual(get(expected, 'kml.Document.description'));
   expect(document.styleUrl).toEqual(get(expected, 'kml.Document.styleUrl'));
+
+  // Document.AtomAuthor
+  expect(document.atomAuthor).toBeInstanceOf(AtomAuthor);
+  const atomAuthor = document.atomAuthor as AtomAuthor;
+  assertAtomPersonConstruct(atomAuthor, get(expected, 'kml.Document.author'));
+
+  // Document.AtomLink
+  expect(document.atomLink).toBeDefined();
+  const atomLink = document.atomLink as AtomLink;
+  assertAtomLink(atomLink, get(expected, 'kml.Document.link'))
 
   // Document.Camera
   expect(document.view).toBeInstanceOf(Camera);
@@ -238,8 +256,8 @@ test('Parses KML file', () => {
 });
 
 export function assertAbstractObjectType(actual: AbstractObjectType, expected: any): void {
-  expect(actual.id).toEqual(get(expected, '@_id'));
-  expect(actual.targetId).toEqual(get(expected, '@_targetId'));
+  expect(actual.id).toEqual(get(expected, '@_id', ''));
+  expect(actual.targetId).toEqual(get(expected, '@_targetId', ''));
 }
 
 export function assertAbstractGeometryType(actual: AbstractGeometryType, expected: any): void {
@@ -260,8 +278,8 @@ export function assertAbstractSubStyleType(actual: AbstractSubStyleType, expecte
 
 export function assertAbstractColorStyleType(actual: AbstractColorStyleType, expected: any): void {
   assertAbstractSubStyleType(actual, expected);
-  expect(actual.color).toEqual(get(expected, 'color'));
-  expect(actual.colorMode).toEqual(get(expected, 'colorMode'));
+  expect(actual.color).toEqual(get(expected, 'color', 'ffffffff'));
+  expect(actual.colorMode).toEqual(get(expected, 'colorMode', ColorModeEnumType.normal));
 }
 
 export function assertStyleType(actual: StyleType, expected: any): void {
@@ -308,50 +326,50 @@ export function assertStyleType(actual: StyleType, expected: any): void {
 
 export function assertIconStyleType(actual: IconStyleType, expected: any): void {
   assertAbstractColorStyleType(actual, expected);
-  expect(actual.scale).toEqual(get(expected, 'scale'));
-  expect(actual.heading).toEqual(get(expected, 'heading'));
-  expect(actual.icon?.id).toEqual(get(expected, 'Icon.@_id'));
-  expect(actual.icon?.targetId).toEqual(get(expected, 'Icon.@_targetId'));
+  expect(actual.scale).toEqual(get(expected, 'scale', 1.0));
+  expect(actual.heading).toEqual(get(expected, 'heading', 0.0));
+  expect(actual.icon?.id).toEqual(get(expected, 'Icon.@_id', ''));
+  expect(actual.icon?.targetId).toEqual(get(expected, 'Icon.@_targetId', ''));
   expect(actual.icon?.href).toEqual(get(expected, 'Icon.href'));
 
-  const expectedHotSpotX = get(expected, 'hotSpot.@_x');
-  const expectedHotSpotY = get(expected, 'hotSpot.@_y');
+  const expectedHotSpotX = parseFloat(get(expected, 'hotSpot.@_x', '1.0'));
+  const expectedHotSpotY = parseFloat(get(expected, 'hotSpot.@_y', '1.0'));
 
-  expect(actual.hotSpot?.x).toEqual(expectedHotSpotX ? parseFloat(expectedHotSpotX) : undefined);
-  expect(actual.hotSpot?.y).toEqual(expectedHotSpotY ? parseFloat(expectedHotSpotY) : undefined);
-  expect(actual.hotSpot?.xunits).toEqual(get(expected, 'hotSpot.@_xunits'));
-  expect(actual.hotSpot?.yunits).toEqual(get(expected, 'hotSpot.@_yunits'));
+  expect(actual.hotSpot?.x).toEqual(expectedHotSpotX);
+  expect(actual.hotSpot?.y).toEqual(expectedHotSpotY);
+  expect(actual.hotSpot?.xunits).toEqual(get(expected, 'hotSpot.@_xunits', UnitsEnumType.fraction));
+  expect(actual.hotSpot?.yunits).toEqual(get(expected, 'hotSpot.@_yunits', UnitsEnumType.fraction));
 }
 
 export function assertLabelStyleType(actual: LabelStyleType, expected: any): void {
   assertAbstractColorStyleType(actual, expected);
-  expect(actual.scale).toEqual(get(expected, 'scale'));
+  expect(actual.scale).toEqual(get(expected, 'scale', 1.0));
 }
 
 export function assertLineStyleType(actual: LineStyleType, expected: any): void {
   assertAbstractColorStyleType(actual, expected);
-  expect(actual.width).toEqual(get(expected, 'width'));
+  expect(actual.width).toEqual(get(expected, 'width', 1.0));
 }
 
 export function assertPolyStyleType(actual: PolyStyleType, expected: any): void {
   assertAbstractColorStyleType(actual, expected);
-  expect(actual.fill).toEqual(get(expected, 'fill'));
-  expect(actual.outline).toEqual(get(expected, 'outline'));
+  expect(actual.fill).toEqual(get(expected, 'fill', true));
+  expect(actual.outline).toEqual(get(expected, 'outline', true));
 }
 
 export function assertBalloonStyleType(actual: BalloonStyleType, expected: any): void {
   assertAbstractSubStyleType(actual, expected);
-  expect(actual.bgColor).toEqual(get(expected, 'bgColor'));
-  expect(actual.textColor).toEqual(get(expected, 'textColor'));
-  expect(actual.text).toEqual(get(expected, 'text'));
-  expect(actual.displayMode).toEqual(get(expected, 'displayMode'));
+  expect(actual.bgColor).toEqual(get(expected, 'bgColor', 'ffffffff'));
+  expect(actual.textColor).toEqual(get(expected, 'textColor', 'ffffffff'));
+  expect(actual.text).toEqual(get(expected, 'text', ''));
+  expect(actual.displayMode).toEqual(get(expected, 'displayMode', DisplayModeEnumType.default));
 }
 
 export function assertListStyleType(actual: ListStyleType, expected: any): void {
   assertAbstractSubStyleType(actual, expected);
-  expect(actual.listItemType).toEqual(get(expected, 'listItemType'));
-  expect(actual.bgColor).toEqual(get(expected, 'bgColor'));
-  expect(actual.maxSnippetLines).toEqual(get(expected, 'maxSnippetLines'));
+  expect(actual.listItemType).toEqual(get(expected, 'listItemType', ListItemTypeEnumType.check));
+  expect(actual.bgColor).toEqual(get(expected, 'bgColor', 'ffffffff'));
+  expect(actual.maxSnippetLines).toEqual(get(expected, 'maxSnippetLines', 2.0));
 
   const expectedItemIcon = get(expected, 'ItemIcon');
   expect(!!actual.itemIcon).toEqual(!!expectedItemIcon);
@@ -404,9 +422,9 @@ export function assertExtendedDataType(actual: ExtendedDataType, expected: any):
 
 export function assertDataType(actual: DataType, expected: any): void {
   assertAbstractObjectType(actual, expected);
-  expect(actual.name).toEqual(get(expected, '@_name'));
-  expect(actual.displayName).toEqual(get(expected, 'displayName'));
-  expect(actual.value).toEqual(get(expected, 'value'));
+  expect(actual.name).toEqual(get(expected, '@_name', ''));
+  expect(actual.displayName).toEqual(get(expected, 'displayName', ''));
+  expect(actual.value).toEqual(get(expected, 'value', ''));
 }
 
 export function assertSchemaDataType(actual: SchemaDataType, expected: any): void {
@@ -427,14 +445,14 @@ export function assertSchemaDataType(actual: SchemaDataType, expected: any): voi
 }
 
 export function assertSimpleDataType(actual: SimpleDataType, expected: any): void {
-  expect(actual.name).toEqual(get(expected, '@_name'));
-  expect(actual.textContent).toEqual(get(expected, '#text'));
+  expect(actual.name).toEqual(get(expected, '@_name', ''));
+  expect(actual.textContent).toEqual(get(expected, '#text', ''));
 }
 
 export function assertSchemaType(actual: SchemaType, expected: any): void {
 
-  expect(actual.id).toEqual(get(expected, '@_id'));
-  expect(actual.name).toEqual(get(expected, '@_name'));
+  expect(actual.id).toEqual(get(expected, '@_id', ''));
+  expect(actual.name).toEqual(get(expected, '@_name', ''));
 
   const expectedSimpleField = get(expected, 'SimpleField');
 
@@ -450,9 +468,9 @@ export function assertSchemaType(actual: SchemaType, expected: any): void {
 }
 
 export function assertSimpleFieldType(actual: SimpleFieldType, expected: any): void {
-  expect(actual.type).toEqual(get(expected, '@_type'));
-  expect(actual.name).toEqual(get(expected, '@_name'));
-  expect(actual.displayName).toEqual(get(expected, 'displayName'));
+  expect(actual.type).toEqual(get(expected, '@_type', ''));
+  expect(actual.name).toEqual(get(expected, '@_name', ''));
+  expect(actual.displayName).toEqual(get(expected, 'displayName', ''));
 }
 
 export function assertRegionType(actual: RegionType, expected: any): void {
@@ -475,73 +493,73 @@ export function assertRegionType(actual: RegionType, expected: any): void {
 
 export function assertLatLonAltBoxType(actual: LatLonAltBoxType, expected: any): void {
   assertAbstractObjectType(actual, expected);
-  expect(actual.north).toEqual(get(expected, 'north'));
-  expect(actual.south).toEqual(get(expected, 'south'));
-  expect(actual.east).toEqual(get(expected, 'east'));
-  expect(actual.west).toEqual(get(expected, 'west'));
-  expect(actual.minAltitude).toEqual(get(expected, 'minAltitude'));
-  expect(actual.maxAltitude).toEqual(get(expected, 'maxAltitude'));
-  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode'));
+  expect(actual.north).toEqual(get(expected, 'north', 180.0));
+  expect(actual.south).toEqual(get(expected, 'south', -180.0));
+  expect(actual.east).toEqual(get(expected, 'east', 180.0));
+  expect(actual.west).toEqual(get(expected, 'west', -180.0));
+  expect(actual.minAltitude).toEqual(get(expected, 'minAltitude', 0.0));
+  expect(actual.maxAltitude).toEqual(get(expected, 'maxAltitude', 0.0));
+  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode', AltitudeModeEnumType.clampToGround));
 }
 
 export function assertLodType(actual: LodType, expected: any): void {
   assertAbstractObjectType(actual, expected);
-  expect(actual.minLodPixels).toEqual(get(expected, 'minLodPixels'));
-  expect(actual.maxLodPixels).toEqual(get(expected, 'maxLodPixels'));
-  expect(actual.minFadeExtent).toEqual(get(expected, 'minFadeExtent'));
-  expect(actual.maxFadeExtent).toEqual(get(expected, 'maxFadeExtent'));
+  expect(actual.minLodPixels).toEqual(get(expected, 'minLodPixels', 0.0));
+  expect(actual.maxLodPixels).toEqual(get(expected, 'maxLodPixels', -1.0));
+  expect(actual.minFadeExtent).toEqual(get(expected, 'minFadeExtent', 0.0));
+  expect(actual.maxFadeExtent).toEqual(get(expected, 'maxFadeExtent', 0.0));
 }
 
 export function assertCameraType(actual: CameraType, expected: any): void {
   assertAbstractViewType(actual, expected);
-  expect(actual.longitude).toEqual(get(expected, 'longitude'));
-  expect(actual.latitude).toEqual(get(expected, 'latitude'));
-  expect(actual.altitude).toEqual(get(expected, 'altitude'));
-  expect(actual.heading).toEqual(get(expected, 'heading'));
-  expect(actual.tilt).toEqual(get(expected, 'tilt'));
-  expect(actual.roll).toEqual(get(expected, 'roll'));
-  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode'));
+  expect(actual.longitude).toEqual(get(expected, 'longitude', 0.0));
+  expect(actual.latitude).toEqual(get(expected, 'latitude', 0.0));
+  expect(actual.altitude).toEqual(get(expected, 'altitude', 0.0));
+  expect(actual.heading).toEqual(get(expected, 'heading', 0.0));
+  expect(actual.tilt).toEqual(get(expected, 'tilt', 0.0));
+  expect(actual.roll).toEqual(get(expected, 'roll', 0.0));
+  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode', AltitudeModeEnumType.clampToGround));
 }
 
 export function assertLookAtType(actual: LookAtType, expected: any): void {
   assertAbstractViewType(actual, expected);
-  expect(actual.longitude).toEqual(get(expected, 'longitude'));
-  expect(actual.latitude).toEqual(get(expected, 'latitude'));
-  expect(actual.altitude).toEqual(get(expected, 'altitude'));
-  expect(actual.heading).toEqual(get(expected, 'heading'));
-  expect(actual.tilt).toEqual(get(expected, 'tilt'));
-  expect(actual.range).toEqual(get(expected, 'range'));
-  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode'));
+  expect(actual.longitude).toEqual(get(expected, 'longitude', 0.0));
+  expect(actual.latitude).toEqual(get(expected, 'latitude', 0.0));
+  expect(actual.altitude).toEqual(get(expected, 'altitude', 0.0));
+  expect(actual.heading).toEqual(get(expected, 'heading', 0.0));
+  expect(actual.tilt).toEqual(get(expected, 'tilt', 0.0));
+  expect(actual.range).toEqual(get(expected, 'range', 0.0));
+  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode', AltitudeModeEnumType.clampToGround));
 }
 
 export function assertPointType(actual: PointType, expected: any): void {
   assertAbstractGeometryType(actual, expected);
-  expect(actual.extrude).toEqual(get(expected, 'extrude'));
-  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode'));
+  expect(actual.extrude).toEqual(get(expected, 'extrude', false));
+  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode', AltitudeModeEnumType.clampToGround));
   expect(actual.coordinates?.join(' ')).toEqual(get(expected, 'coordinates'));
 }
 
 export function assertLinearRingType(actual: LinearRingType, expected: any): void {
   assertAbstractGeometryType(actual, expected);
-  expect(actual.extrude).toEqual(get(expected, 'extrude'));
-  expect(actual.tessellate).toEqual(get(expected, 'tessellate'));
-  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode'));
+  expect(actual.extrude).toEqual(get(expected, 'extrude', false));
+  expect(actual.tessellate).toEqual(get(expected, 'tessellate', false));
+  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode', AltitudeModeEnumType.clampToGround));
   expect(actual.coordinates?.join(' ')).toEqual(get(expected, 'coordinates'));
 }
 
 export function assertLineStringType(actual: LineStringType, expected: any): void {
   assertAbstractGeometryType(actual, expected);
-  expect(actual.extrude).toEqual(get(expected, 'extrude'));
-  expect(actual.tessellate).toEqual(get(expected, 'tessellate'));
-  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode'));
+  expect(actual.extrude).toEqual(get(expected, 'extrude', false));
+  expect(actual.tessellate).toEqual(get(expected, 'tessellate', false));
+  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode', AltitudeModeEnumType.clampToGround));
   expect(actual.coordinates?.join(' ')).toEqual(get(expected, 'coordinates'));
 }
 
 export function assertPolygonType(actual: PolygonType, expected: any): void {
   assertAbstractGeometryType(actual, expected);
-  expect(actual.extrude).toEqual(get(expected, 'extrude'));
-  expect(actual.tessellate).toEqual(get(expected, 'tessellate'));
-  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode'));
+  expect(actual.extrude).toEqual(get(expected, 'extrude', false));
+  expect(actual.tessellate).toEqual(get(expected, 'tessellate', false));
+  expect(actual.altitudeMode).toEqual(get(expected, 'altitudeMode', AltitudeModeEnumType.clampToGround));
 
   const expectedOuterBoundaryIs = get(expected, 'outerBoundaryIs.LinearRing');
   const expectedInnerBoundaryIs = get(expected, 'innerBoundaryIs.LinearRing');
@@ -560,4 +578,46 @@ export function assertPolygonType(actual: PolygonType, expected: any): void {
       assertLinearRingType(innerBoundaryIs, get(expected, `innerBoundaryIs.LinearRing[${index}]`))
     });
   }
+}
+
+export function assertAtomPersonConstruct(actual: AtomPersonConstruct, expected: any) {
+
+  const expectedName = get(expected, 'name');
+
+  if (actual.name.length === 1) {
+    expect(actual.name[0]).toEqual(expectedName);
+  } else if (actual.name.length > 1) {
+    actual.name.forEach((name, index) => {
+      expect(name).toEqual(get(expected, `name[${index}]`))
+    });
+  }
+
+  const expectedUri = get(expected, 'uri');
+
+  if (actual.uri.length === 1) {
+    expect(actual.uri[0]).toEqual(expectedUri);
+  } else if (actual.uri.length > 1) {
+    actual.uri.forEach((uri, index) => {
+      expect(uri).toEqual(get(expected, `uri[${index}]`))
+    });
+  }
+
+  const expectedEmail = get(expected, 'email');
+
+  if (actual.email.length === 1) {
+    expect(actual.email[0]).toEqual(expectedEmail);
+  } else if (actual.email.length > 1) {
+    actual.email.forEach((email, index) => {
+      expect(email).toEqual(get(expected, `email[${index}]`))
+    });
+  }
+}
+
+export function assertAtomLink(actual: AtomLink, expected: any) {
+  expect(actual.href).toEqual(get(expected, '@_href'));
+  expect(actual.rel).toEqual(get(expected, '@_rel'));
+  expect(actual.type).toEqual(get(expected, '@_type'));
+  expect(actual.hreflang).toEqual(get(expected, '@_hreflang'));
+  expect(actual.title).toEqual(get(expected, '@_title'));
+  expect(actual.length).toEqual(get(expected, '@_length'));
 }

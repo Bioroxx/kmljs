@@ -1,7 +1,10 @@
 // ./parser
 export * from './parser/kml-parser';
 export * from './parser/kml-factory';
+export * from './parser/kml-attribute-name';
 export * from './parser/kml-tag-name';
+export * from './parser/atom-attribute-name';
+export * from './parser/atom-tag-name';
 
 // ./dom/kml
 export * from './dom/kml/abstract-color-style-group';
@@ -154,11 +157,12 @@ export * from './dom/kml/types/vec2-type';
 export * from './dom/kml/types/view-refresh-mode-enum-type';
 export * from './dom/kml/types/view-volume-type';
 
-// ./dom/xsd
-export * from './dom/xsd/anyURI';
-export * from './dom/xsd/id';
-export * from './dom/xsd/ncname';
+// ./dom/xs
+export * from './dom/xs/anyURI';
+export * from './dom/xs/id';
+export * from './dom/xs/ncname';
 
 // ./dom/atom
+export * from './dom/atom/atom-person-construct';
 export * from './dom/atom/atom-author';
 export * from './dom/atom/atom-link';

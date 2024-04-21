@@ -5,10 +5,10 @@ import {DisplayModeEnumType} from './types/display-mode-enum-type';
 
 export class BalloonStyle extends AbstractSubStyleGroup implements BalloonStyleType {
 
-  bgColor?: ColorType;
-  textColor?: ColorType;
-  text?: string;
-  displayMode?: DisplayModeEnumType;
+  bgColor: ColorType;
+  textColor: ColorType;
+  text: string;
+  displayMode: DisplayModeEnumType;
 
   constructor(balloonStyleType: BalloonStyleType) {
     super(balloonStyleType);

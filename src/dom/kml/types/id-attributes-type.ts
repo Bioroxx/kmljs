@@ -1,10 +1,10 @@
-import {ID} from '../../xsd/id';
-import {NCName} from '../../xsd/ncname';
+import {ID} from '../../xs/id';
+import {NCName} from '../../xs/ncname';
 
 export interface IdAttributes {
 
   // Attributes
-  id?: ID;
-  targetId?: NCName;
+  id: ID;
+  targetId: NCName;
 
 }

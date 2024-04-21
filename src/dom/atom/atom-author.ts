@@ -1,7 +1,14 @@
-export interface AtomAuthor {
+import {AtomPersonConstruct} from './atom-person-construct';
 
-  // Child elements
-  name?: string;
-  uri?: string;
-  email?: string; //TODO: implement atom:atomEmailAddress type
+export class AtomAuthor implements AtomPersonConstruct {
+
+  name: string[];
+  uri: string[];
+  email: string[];
+
+  constructor(type: AtomPersonConstruct) {
+    this.name = type.name;
+    this.uri = type.uri;
+    this.email = type.email;
+  }
 }

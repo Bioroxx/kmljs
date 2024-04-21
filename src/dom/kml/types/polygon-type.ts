@@ -5,10 +5,10 @@ import {BoundaryType} from './boundary-type';
 export interface PolygonType extends AbstractGeometryType {
 
   // Child elements
-  extrude?: boolean;
-  tessellate?: boolean;
-  altitudeMode?: AltitudeModeGroup;
+  extrude: boolean;
+  tessellate: boolean;
+  altitudeMode: AltitudeModeGroup;
   outerBoundaryIs?: BoundaryType;
-  innerBoundaryIs?: BoundaryType[];
+  innerBoundaryIs: BoundaryType[];
 
 }

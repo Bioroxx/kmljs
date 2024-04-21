@@ -4,9 +4,9 @@ import {LatLonAltBoxType} from './types/lat-lon-alt-box-type';
 
 export class LatLonAltBox extends AbstractLatLonBox implements LatLonAltBoxType {
 
-  minAltitude?: number;
-  maxAltitude?: number;
-  altitudeMode?: AltitudeModeGroup;
+  minAltitude: number;
+  maxAltitude: number;
+  altitudeMode: AltitudeModeGroup;
 
   constructor(latLonAltBoxType: LatLonAltBoxType) {
     super(latLonAltBoxType);

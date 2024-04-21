@@ -3,10 +3,10 @@ import {AbstractObjectType} from './abstract-object-type';
 export interface DataType extends AbstractObjectType {
 
   // Attributes
-  name?: string;
+  name: string;
 
   // Child elements
-  displayName?: string;
-  value?: string;
+  displayName: string;
+  value: string;
 
 }

@@ -1,11 +1,10 @@
 export interface AtomLink {
 
   // Attributes
-  href?: string;
+  href: string;
   rel?: string;
-  type?: string;      // TODO: implement atom:atomMediaType type
-  hreflang?: string;  // TODO: implement atom:atomLanguageTag type
+  type?: string;
+  hreflang?: string;
   title?: string;
   length?: string;
-
 }

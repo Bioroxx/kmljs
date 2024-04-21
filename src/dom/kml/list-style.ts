@@ -6,10 +6,10 @@ import {ColorType} from './types/color-type';
 
 export class ListStyle extends AbstractSubStyleGroup implements ListStyleType {
 
-  listItemType?: ListItemTypeEnumType;
-  bgColor?: ColorType;
-  itemIcon?: ItemIcon[];
-  maxSnippetLines?: number;
+  listItemType: ListItemTypeEnumType;
+  bgColor: ColorType;
+  itemIcon: ItemIcon[];
+  maxSnippetLines: number;
 
   constructor(listStyleType: ListStyleType) {
     super(listStyleType);

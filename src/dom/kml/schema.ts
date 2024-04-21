@@ -1,12 +1,12 @@
-import {SimpleField} from './simple-field';
 import {SchemaType} from './types/schema-type';
-import {ID} from '../xsd/id';
+import {ID} from '../xs/id';
+import {SimpleFieldType} from './types/simple-field-type';
 
 export class Schema implements SchemaType {
 
-  id?: ID;
-  name?: string;
-  simpleField: SimpleField[];
+  id: ID;
+  name: string;
+  simpleField: SimpleFieldType[];
 
   constructor(schemaType: SchemaType) {
 

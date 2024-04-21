@@ -5,8 +5,8 @@ import {Angle90Type} from './angle-90-type';
 export interface LocationType extends AbstractObjectType {
 
   // Child elements
-  longitude?: Angle180Type;
-  latitude?: Angle90Type;
-  altitude?: number;
+  longitude: Angle180Type;
+  latitude: Angle90Type;
+  altitude: number;
 
 }

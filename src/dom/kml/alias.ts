@@ -1,6 +1,6 @@
 import {AbstractObjectGroup} from './abstract-object-group';
 import {AliasType} from './types/alias-type';
-import {AnyURI} from '../xsd/anyURI';
+import {AnyURI} from '../xs/anyURI';
 
 export class Alias extends AbstractObjectGroup implements AliasType {
 

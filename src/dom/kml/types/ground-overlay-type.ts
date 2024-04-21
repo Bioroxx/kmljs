@@ -5,8 +5,8 @@ import {LatLonBoxType} from './lat-lon-box-type';
 export interface GroundOverlayType extends AbstractOverlayType {
 
   // Child elements
-  altitude?: number;
-  altitudeMode?: AltitudeModeGroup;
+  altitude: number;
+  altitudeMode: AltitudeModeGroup;
   latLonBox?: LatLonBoxType;
 
 }

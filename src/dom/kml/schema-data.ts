@@ -1,12 +1,12 @@
 import {AbstractObjectGroup} from './abstract-object-group';
-import {SimpleData} from './simple-data';
 import {SchemaDataType} from './types/schema-data-type';
-import {AnyURI} from '../xsd/anyURI';
+import {AnyURI} from '../xs/anyURI';
+import {SimpleDataType} from './types/simple-data-type';
 
 export class SchemaData extends AbstractObjectGroup implements SchemaDataType {
 
   schemaUrl?: AnyURI;
-  simpleData: SimpleData[];
+  simpleData: SimpleDataType[];
 
   constructor(schemaDataType: SchemaDataType) {
     super(schemaDataType);

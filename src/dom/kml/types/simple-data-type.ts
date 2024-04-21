@@ -1,8 +1,8 @@
 export interface SimpleDataType {
 
   // Attribute
-  name?: string;
+  name: string;
 
   // TextContent
-  textContent?: string;
+  textContent: string;
 }

@@ -5,6 +5,6 @@ export interface ItemIconType extends AbstractObjectType {
 
   // Child elements
   state?: ItemIconStateType;
-  href?: string;
+  href: string;
 
 }

@@ -9,7 +9,7 @@ import {ResourceMapType} from './resource-map-type';
 export interface ModelType extends AbstractGeometryType {
 
   // Child elements
-  altitudeMode?: AltitudeModeGroup;
+  altitudeMode: AltitudeModeGroup;
   location?: LocationType;
   orientation?: OrientationType;
   scale?: ScaleType;

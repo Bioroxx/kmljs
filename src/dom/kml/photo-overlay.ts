@@ -1,18 +1,18 @@
 import {AbstractOverlayGroup} from './abstract-overlay-group';
-import {Point} from './point';
-import {ImagePyramid} from './image-pyramid';
-import {ViewVolume} from './view-volume';
 import {PhotoOverlayType} from './types/photo-overlay-type';
 import {Angle180Type} from './types/angle-180-type';
 import {ShapeEnumType} from './types/shape-enum-type';
+import {ViewVolumeType} from './types/view-volume-type';
+import {ImagePyramidType} from './types/image-pyramid-type';
+import {PointType} from './types/point-type';
 
 export class PhotoOverlay extends AbstractOverlayGroup implements PhotoOverlayType {
 
-  rotation?: Angle180Type;
-  viewVolume?: ViewVolume;
-  imagePyramid?: ImagePyramid;
-  point?: Point;
-  shape?: ShapeEnumType;
+  rotation: Angle180Type;
+  viewVolume?: ViewVolumeType;
+  imagePyramid?: ImagePyramidType;
+  point?: PointType;
+  shape: ShapeEnumType;
 
   constructor(photoOverlayType: PhotoOverlayType) {
     super(photoOverlayType);

@@ -5,13 +5,13 @@ import {ViewRefreshModeEnumType} from './types/view-refresh-mode-enum-type';
 
 export class Icon extends AbstractObjectGroup implements LinkType {
 
-  refreshMode?: RefreshModeEnumType;
-  refreshInterval?: number;
-  viewRefreshMode?: ViewRefreshModeEnumType;
-  viewRefreshTime?: number;
-  viewBoundScale?: number;
-  viewFormat?: string;
-  httpQuery?: string;
+  refreshMode: RefreshModeEnumType;
+  refreshInterval: number;
+  viewRefreshMode: ViewRefreshModeEnumType;
+  viewRefreshTime: number;
+  viewBoundScale: number;
+  viewFormat: string;
+  httpQuery: string;
 
   constructor(linkType: LinkType) {
     super(linkType);

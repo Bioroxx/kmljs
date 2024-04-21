@@ -1,20 +1,20 @@
-import {AbstractViewGroup} from './abstract-view-group';
-import {Update} from './update';
 import {NetworkLinkControlType} from './types/network-link-control.type';
 import {DateTimeType} from './types/date-time-type';
+import {AbstractViewType} from './types/abstract-view-type';
+import {UpdateType} from './types/update-type';
 
 export class NetworkLinkControl implements NetworkLinkControlType {
 
-  minRefreshPeriod?: number;
-  maxSessionLength?: number;
-  cookie?: string;
-  message?: string;
-  linkName?: string;
-  linkDescription?: string;
-  linkSnippet?: string;
+  minRefreshPeriod: number;
+  maxSessionLength: number;
+  cookie: string;
+  message: string;
+  linkName: string;
+  linkDescription: string;
+  linkSnippet: string;
   expires?: DateTimeType;
-  update?: Update;
-  view?: AbstractViewGroup;
+  update?: UpdateType;
+  view?: AbstractViewType;
 
   constructor(networkLinkControlType: NetworkLinkControlType) {
 
